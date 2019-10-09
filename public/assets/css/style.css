@@ -707,7 +707,7 @@ a.dt-button.active:not(.disabled) {
   transition: margin-left 300ms ease-in-out 0s;
 }
 .logo {
-  background: #343957;
+  background: #210D0D;
   display: inline-block;
   padding: 15px 0;
   text-align: center;
