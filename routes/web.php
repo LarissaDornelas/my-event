@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'DashboardController@initialScreen');
+
+
+Route::prefix('users')->group(function () {
+    Route::get('/', 'UserController@getAll')->name('getAllUsers');
+    Route::get('/{id}', 'UserController@getOne')->name('getOneUser');
+    Route::post('/', 'UserController@create')->name('createUser');
+    Route::put('/{id}', 'UserController@update')->name('updateUser');
+    Route::delete('/{id}', 'UserController@delete')->name('deleteUser');
 });
