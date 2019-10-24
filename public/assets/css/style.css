@@ -2723,7 +2723,7 @@ tbody tr th {
 }
 tbody tr td {
   font-family: 'Roboto', sans-serif;
-  color: #868e96;
+  color: #5b5c5d;
 }
 tbody tr td:last-child {
   text-align: right;
@@ -2977,18 +2977,12 @@ tbody tr td:last-child {
   padding-bottom: 15px;
   width: 170px;
   font-size: 16px;
-  color: #868e96;
+  color: #4e565f
 }
-.phone-number,
-.mail-address,
-.contact-email,
-.contact-website,
-.contact-skype,
-.birth-date,
-.gender {
+.labelDetail {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  color: #373757;
+  color: #040000;
 }
 .profile-widget {
   margin: 8px 0;
@@ -4038,7 +4032,7 @@ h6.h1 {
   display: none;
 }
 .pace .pace-progress {
-  background: #28a745;
+  background: darkred;
   position: fixed;
   z-index: 2000;
   top: 0;

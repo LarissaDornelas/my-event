@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model  
+class Category extends Model
 {
 
-    
+
 
     /**
      * The database table used by the model.
@@ -21,7 +21,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'active'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -43,5 +43,4 @@ class Category extends Model
      * @var array
      */
     protected $dates = [];
-
 }

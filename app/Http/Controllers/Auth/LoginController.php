@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Symfony\Component\HttpFoundation\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +38,39 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLogin()
+    {
+        return view('login');
+    }
+
+    public function login(Request $request)
+    {
+
+        $email = $request['email'];
+        $password = $request['password'];
+        try {
+            $user = User::where('email', $email)
+                ->first();
+
+            if ($user != null && \Hash::check($password, $user->password)) {
+
+                $getFirstName = explode(' ', $user->name);
+                $firstName = $getFirstName[0];
+
+                $user->firstName = $firstName;
+
+                Auth::loginUsingId($user->id);
+
+
+                return redirect('/');
+            } else {
+
+                return redirect('/login')->with('error', 'test');
+            }
+        } catch (\Exception $e) {
+            return redirect('/login')->with('error', 'test');
+        }
     }
 }
