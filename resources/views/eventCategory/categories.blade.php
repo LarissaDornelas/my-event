@@ -4,7 +4,7 @@
 @endsection
 @section('breadcrumbLinks')
 <li class="breadcrumb-item"><a class="general-links" href="{{ route('dashboard')}}">Dashboard</a></li>
-<li class="breadcrumb-item active">Categorias</li>
+<li class="breadcrumb-item active">Categorias de Evento</li>
 @endsection
 @section('pageContent')
 @if (session('status'))
@@ -25,9 +25,11 @@
 @endif
 <div class="cards-category-list">
     @foreach ($categoryData as $category)
-    <div class="card-category" data-toggle="modal-edit" data-target=".bd-modal-edit">
+    <div class="card-category edit" data-toggle="modal" data-target="#editCategoryModal" data-value="{{$category->id
+    }}" data-active="{{$category->active}}">
 
-        <div class="card-category_image"> <img src="{{asset('assets/images/category.png')}}" /> </div>
+        <div class="card-category_image"> <img @if($category->active)src="{{asset('assets/images/category.png')}}" @else
+            src="{{asset('assets/images/category-inative.png')}}" @endif/> </div>
         <div class="card-category_title title-white">
 
             <p class="title-white">{{$category->name}}</p>
@@ -46,7 +48,7 @@
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <form action="{{ route('createCategory') }}" method="POST">
+            <form action="{{ route('createEventCategory') }}" method="POST">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -89,14 +91,18 @@
         </div>
     </div>
 
-    <div class="modal-edit fade bd-modal-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
+
+
+
+
+    <div class="modal fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <form action="{{ route('createCategory') }}" method="POST">
+            <form id="editForm" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Categoria</h5>
+                        <h5 class="modal-title">Editar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true"><i class="ti-close"></i></span>
                         </button>
@@ -106,7 +112,7 @@
                         <div class="form-row">
                             <div class="col-md-12">
                                 <label for="name">Nome da Categoria</label>
-                                <input type="text" class="form-control" id="name" name="name"
+                                <input type="text" class="form-control" id="editName" name="name"
                                     placeholder="Nome da Categoria" required>
                             </div>
                         </div>
@@ -116,7 +122,7 @@
 
                                 <div class="form-group ">
                                     <label class="switch">
-                                        <input name="active" value="true" type="checkbox" checked>
+                                        <input name="active" value="true" type="checkbox" id="editActive">
                                         <span class="slider round"></span>
                                     </label>
                                     <label for="active">Ativo</label>
@@ -128,11 +134,15 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-app-primary">Cadastrar</button>
+                        <button type="submit" class="btn btn-app-primary">Salvar Alterações</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+@endsection
+@section('addjs')
+<script type="text/javascript" src="{{asset('assets/js/myEvent/categoryEventEdit.js')}}"></script>
+
 @endsection

@@ -26,13 +26,12 @@
     <link rel="stylesheet" href="{{asset('assets/css/myEvent/app.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-
+    @yield('morecss')
 
 </head>
 
 <body>
     @yield('content')
-
     <script src="{{asset('assets/js/lib/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/jquery.nanoscroller.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/menubar/sidebar.js')}}"></script>
@@ -68,10 +67,12 @@
     <script src="{{asset('assets/js/lib/owl-carousel/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/owl-carousel/owl.carousel-init.js')}}"></script>
     <script src="{{asset('assets/js/scripts.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="{{asset('assets/js/myEvent/app.js')}}"></script>
+    @yield('morejs')
 </body>
 
 </html>

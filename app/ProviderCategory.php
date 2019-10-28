@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class ProviderCategory extends Model
 {
 
 
@@ -14,14 +14,14 @@ class Category extends Model
      *
      * @var string
      */
-    protected $table = 'category';
+    protected $table = 'ProviderCategory';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'active'];
+    protected $fillable = ['name'];
 
     /**
      * The attributes excluded from the model's JSON form.

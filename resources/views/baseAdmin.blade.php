@@ -25,12 +25,24 @@ Meu Evento
                             href="{{ route('getAllEvents')}}"><i class="ti-calendar"></i>
                             Eventos </a>
                     </li>
+
                     <li><a><i class="ti-truck"></i>
                             Fornecedores </a>
-                    <li {!! Route::is('getAllCategories') ? "class='active'" : '' !!}><a
-                            href="{{ route('getAllCategories')}}"><i class="ti-bookmark-alt"></i>
-                            Categorias </a>
+                    <li class=@if( Route::is('getAllEventCategories')) 'open' @else '' @endif><a
+                            class="@if( Route::is('getAllEventCategories'))'' @else sidebar-sub-toggle @endif">
+                            <i class="ti-bookmark-alt"></i> Categorias <span
+                                class="sidebar-collapse-icon ti-angle-down active"></span></a>
+                        <ul style="display: @if( Route::is('getAllEventCategories')) block @else none @endif">
+                            <li {!! Route::is('getAllEventCategories') ? "class='active'" : '' !!}> <a
+                                    href="{{ route('getAllEventCategories')}}"><i class="ti-bookmark-alt"></i>
+                                    Eventos</a></li>
+                            <li><a href="index1.html"><i class="ti-bookmark-alt"></i>Fornecedores</a></li>
+
+
+
+                        </ul>
                     </li>
+
                     <li><a><i class="ti-settings"></i>
                             Configurações </a>
                     </li>
@@ -266,4 +278,7 @@ Meu Evento
 
 
 
+    @endsection
+    @section('morejs')
+    @yield('addjs')
     @endsection

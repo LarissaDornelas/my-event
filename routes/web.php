@@ -34,16 +34,20 @@ Route::prefix('users')->middleware('auth')->group(function () {
 
 Route::prefix('event')->middleware('auth')->group(function () {
     Route::get('/', 'EventController@getAll')->name('getAllEvents');
-    Route::post('/', 'EventController@create')->name('createEvent');
+    /*Route::post('/', 'EventController@create')->name('createEvent');
     Route::put('/{id}', 'EventController@update')->name('updateEvent');
     Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
-    Route::delete('/{id}', 'EventController@delete')->name('deleteEvent');
+    Route::delete('/{id}', 'EventController@delete')->name('deleteEvent');*/
 });
 
-Route::prefix('category')->middleware('auth')->group(function () {
-    Route::get('/', 'CategoryController@getAll')->name('getAllCategories');
-    Route::post('/', 'CategoryController@create')->name('createCategory');
-    Route::put('/{id}', 'CategoryController@update')->name('updateCategory');
-    Route::get('/{id}', 'CategoryController@getOne')->name('getOneCategory');
-    Route::delete('/{id}', 'CategoryController@delete')->name('deleteCategory');
+Route::prefix('event/category')->middleware('auth')->group(function () {
+    Route::get('/', 'EventCategoryController@getAll')->name('getAllEventCategories');
+    Route::post('/', 'EventCategoryController@create')->name('createEventCategory');
+    Route::put('/{id}', 'EventCategoryController@update')->name('updateEventCategory');
+});
+
+Route::prefix('provider/category')->middleware('auth')->group(function () {
+    Route::get('/', 'ProviderCategoryController@getAll')->name('getAllProviderCategories');
+    Route::post('/', 'ProviderCategoryController@create')->name('createProviderCategory');
+    Route::put('/{id}', 'ProviderCategoryController@update')->name('updateProviderCategory');
 });
