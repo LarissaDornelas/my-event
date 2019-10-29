@@ -14,14 +14,14 @@ class ProviderCategory extends Model
      *
      * @var string
      */
-    protected $table = 'ProviderCategory';
+    protected $table = 'providerCategory';
 
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'active'];
 
     /**
      * The attributes excluded from the model's JSON form.

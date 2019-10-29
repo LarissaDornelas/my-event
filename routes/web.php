@@ -24,13 +24,26 @@ Route::get('/logout', function () {
 Route::get('/', 'DashboardController@initialScreen')->middleware('auth')->name('dashboard');
 
 
-Route::prefix('users')->middleware('auth')->group(function () {
+Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('/', 'UserController@getAll')->name('getAllUsers');
     Route::post('/', 'UserController@create')->name('createUser');
     Route::put('/{id}', 'UserController@update')->name('updateUser');
     Route::get('/{id}', 'UserController@getOne')->name('getOneUser');
-    Route::delete('/{id}', 'UserController@delete')->name('deleteUser');
 });
+
+Route::prefix('provider/category')->middleware('auth')->group(function () {
+    Route::get('/', 'ProviderCategoryController@getAll')->name('getAllProviderCategories');
+    Route::post('/', 'ProviderCategoryController@create')->name('createProviderCategory');
+    Route::put('/{id}', 'ProviderCategoryController@update')->name('updateProviderCategory');
+});
+
+Route::prefix('provider')->middleware('auth')->group(function () {
+    Route::get('/', 'ProviderController@getAll')->name('getAllProviders');
+    Route::post('/', 'ProviderController@create')->name('createProvider');
+    Route::put('/{id}', 'ProviderController@update')->name('updateProvider');
+    Route::get('/{id}', 'ProviderController@getOne')->name('getOneProvider');
+});
+
 
 Route::prefix('event')->middleware('auth')->group(function () {
     Route::get('/', 'EventController@getAll')->name('getAllEvents');
@@ -44,10 +57,4 @@ Route::prefix('event/category')->middleware('auth')->group(function () {
     Route::get('/', 'EventCategoryController@getAll')->name('getAllEventCategories');
     Route::post('/', 'EventCategoryController@create')->name('createEventCategory');
     Route::put('/{id}', 'EventCategoryController@update')->name('updateEventCategory');
-});
-
-Route::prefix('provider/category')->middleware('auth')->group(function () {
-    Route::get('/', 'ProviderCategoryController@getAll')->name('getAllProviderCategories');
-    Route::post('/', 'ProviderCategoryController@create')->name('createProviderCategory');
-    Route::put('/{id}', 'ProviderCategoryController@update')->name('updateProviderCategory');
 });

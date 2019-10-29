@@ -26,17 +26,22 @@ Meu Evento
                             Eventos </a>
                     </li>
 
-                    <li><a><i class="ti-truck"></i>
+                    <li {!! Route::is('getAllProviders') || Route::is('getOneProvider')? "class='active'" : '' !!}><a
+                            href="{{ route('getAllProviders')}}"><i class="ti-truck"></i>
                             Fornecedores </a>
-                    <li class=@if( Route::is('getAllEventCategories')) 'open' @else '' @endif><a
-                            class="@if( Route::is('getAllEventCategories'))'' @else sidebar-sub-toggle @endif">
+                    <li class=@if( Route::is('getAllEventCategories') || Route::is('getAllProviderCategories')) 'open'
+                        @else '' @endif><a
+                            class="@if( Route::is('getAllEventCategories') || Route::is('getAllProviderCategories'))'' @else sidebar-sub-toggle @endif">
                             <i class="ti-bookmark-alt"></i> Categorias <span
                                 class="sidebar-collapse-icon ti-angle-down active"></span></a>
-                        <ul style="display: @if( Route::is('getAllEventCategories')) block @else none @endif">
+                        <ul
+                            style="display: @if( Route::is('getAllEventCategories')|| Route::is('getAllProviderCategories')) block @else none @endif">
                             <li {!! Route::is('getAllEventCategories') ? "class='active'" : '' !!}> <a
                                     href="{{ route('getAllEventCategories')}}"><i class="ti-bookmark-alt"></i>
                                     Eventos</a></li>
-                            <li><a href="index1.html"><i class="ti-bookmark-alt"></i>Fornecedores</a></li>
+                            <li {!! Route::is('getAllProviderCategories') ? "class='active'" : '' !!}><a
+                                    href="{{ route('getAllProviderCategories')}}"><i
+                                        class="ti-bookmark-alt"></i>Fornecedores</a></li>
 
 
 

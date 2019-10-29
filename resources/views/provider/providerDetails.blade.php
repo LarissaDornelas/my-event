@@ -1,10 +1,10 @@
 @extends('baseAdmin')
 @section('pageTitle')
-<h1>Detalhes do Usuário</h1>
+<h1>Detalhes do Fornecedor</h1>
 @endsection
 @section('breadcrumbLinks')
-<li class="breadcrumb-item"><a class="general-links" href="{{ route('getAllUsers')}}">Usuários</a></li>
-<li class="breadcrumb-item active">Detalhes do Usuário</li>
+<li class="breadcrumb-item"><a class="general-links" href="{{ route('getAllProviders')}}">Fornecedores</a></li>
+<li class="breadcrumb-item active">Detalhes do Fornecedor</li>
 
 @endsection
 @section('pageContent')
@@ -29,32 +29,25 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="user-profile">
+                    <div class="provider-profile">
                         <div class="row">
-                            <div class="col-lg-3" style='border-right: 0.1px solid grey;'>
-                                <div class="user-photo m-b-20">
+                            <div class="col-lg-3" style="border-right: 0.1px solid grey;">
+                                <div class="provider-photo m-b-20">
                                     <img class="img-fluid" style="max-height: 240px;"
-                                        src="{{asset('assets/images/default-profile.png')}}" alt="" />
+                                        src="{{asset('assets/images/avatar-provider.jpg')}}" alt="" />
                                 </div>
-                                <div class="user-work">
-                                    <h4>Redes Sociais</h4>
-                                    <div class="work-content">
-                                        <i class="ti-instagram"></i> fabi_dolabela
-
-
-                                    </div>
-                                    <div class="work-content">
-                                        <i class="ti-facebook"></i> Fabiany Dolabela
-                                    </div>
+                                <div class="provider-work">
+                                    <h5>Sobre</h5>
+                                    {{$providerData->description}}
                                 </div>
 
                             </div>
                             <div class="col-lg-7">
-                                <div class="user-profile-name">{{$userData->name}}</div>
-                                <div class="user-Location"><i class="ti-location-pin"></i> João Monlevade - MG</div>
+                                <div class="provider-profile-name">{{$providerData->name}}</div>
+                                <div class="provider-Location"><i class="ti-location-pin"></i> João Monlevade - MG</div>
 
 
-                                <div class="custom-tab user-profile-tab">
+                                <div class="custom-tab provider-profile-tab">
 
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="1">
@@ -62,7 +55,7 @@
                                                 <h4>Informações de Contato</h4>
                                                 <div class="phone-content">
                                                     <span class="contact-title">Telefone:</span>
-                                                    <span class="labelDetail">{{$userData->phone}}</span>
+                                                    <span class="labelDetail">{{$providerData->phone}}</span>
                                                 </div>
                                                 <div class="address-content">
                                                     <span class="contact-title">Endereço:</span>
@@ -70,40 +63,34 @@
                                                 </div>
                                                 <div class="email-content">
                                                     <span class="contact-title">Email:</span>
-                                                    <span class="labelDetail">{{$userData->email}}</span>
+                                                    <span class="labelDetail">{{$providerData->email}}</span>
+                                                </div>
+                                                <div class="website-content">
+                                                    <span class="contact-title">Website:</span>
+                                                    <span class="labelDetail">{{$providerData->website}}</span></span>
                                                 </div>
                                                 <div class="website-content">
                                                     <span class="contact-title">Facebook:</span>
-                                                    <span class="labelDetail">test</span></span>
+                                                    <span
+                                                        class="labelDetail">{{$providerData->facebook_name}}</span></span>
                                                 </div>
                                                 <div class="skype-content">
                                                     <span class="contact-title">Instagram:</span>
-                                                    <span class="labelDetail">test</span>
+                                                    <span class="labelDetail">{{$providerData->instagram_name}}</span>
                                                 </div>
                                             </div>
                                             <div class="basic-information">
                                                 <h4>Informações Básicas</h4>
                                                 <div class="birthday-content">
-                                                    <span class="contact-title">Aniversário:</span>
-                                                    <span class="labelDetail">03/10/1998 </span>
-                                                </div>
-                                                <div class="gender-content">
-                                                    <span class="contact-title">Gênero:</span>
-                                                    <span class="labelDetail">Masculino</span>
-                                                </div>
-                                            </div>
-                                            <div class="basic-information">
-                                                <h4>Informações de conta</h4>
-                                                <div>
-                                                    <span class="contact-title">Administrador:</span>
-                                                    <span class="labelDetail">@if($userData->admin)Sim @else Não @endif
-                                                    </span>
+                                                    <span class="contact-title">Categoria:</span>
+                                                    <span class="labelDetail">{{$providerData->category}} </span>
                                                 </div>
                                                 <div>
                                                     <span class="contact-title">Ativo:</span>
-                                                    <span class="labelDetail">@if($userData->active)Sim @else Não
+                                                    <span class="labelDetail">@if($providerData->active)Sim @else Não
                                                         @endif</span>
                                                 </div>
+
                                             </div>
 
                                         </div>
@@ -125,12 +112,12 @@
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('updateUser', ['id'=> $userData->id]) }}" method="POST">
+        <form action="{{ route('updateProvider', ['id'=> $providerData->id]) }}" method="POST">
             @method('PUT')
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Editar Usuário</h5>
+                    <h5 class="modal-title">Editar Fornecedor</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true"><i class="ti-close"></i></span>
                     </button>
@@ -141,33 +128,33 @@
 
                     <div class="form-row">
                         <div class="col-md-12">
-                            <label for="name">Nome Completo</label>
+                            <label for="name">Nome do Fornecedor</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nome Completo"
-                                required value="{{$userData->name}}">
+                                required value="{{$providerData->name}}">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="cpf">CPF</label>
                             <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF"
-                                value="{{$userData->cpf}}" required>
+                                value="{{$providerData->cpf}}" required>
                         </div>
                         <div class="col-md-6">
                             <label for="phone">Telefone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="{{$userData->phone}}"
-                                placeholder="Telefone" required>
+                            <input type="text" class="form-control" id="phone" name="phone"
+                                value="{{$providerData->phone}}" placeholder="Telefone" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-6">
                             <label for="email">Celular</label>
                             <input type="text" class="form-control" id="cellPhone" name="cellPhone"
-                                value="{{$userData->cellPhone}}" placeholder="Celular" required>
+                                value="{{$providerData->cellPhone}}" placeholder="Celular" required>
                         </div>
                         <div class="col-6">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="{{$userData->email}}"
-                                placeholder="Email" required>
+                            <input type="text" class="form-control" id="email" name="email"
+                                value="{{$providerData->email}}" placeholder="Email" required>
                         </div>
                     </div>
                     <div class="switches">
@@ -175,7 +162,7 @@
 
                             <div class="form-group ">
                                 <label class="switch">
-                                    <input name="active" value="true" type="checkbox" @if($userData->active) checked
+                                    <input name="active" value="true" type="checkbox" @if($providerData->active) checked
                                     @endif>
                                     <span class="slider round"></span>
                                 </label>
@@ -185,7 +172,7 @@
                         <div class="form-row ">
                             <div class="form-group ">
                                 <label class="switch">
-                                    <input name="admin" value="true" type="checkbox" @if($userData->admin) checked
+                                    <input name="admin" value="true" type="checkbox" @if($providerData->admin) checked
                                     @endif>
                                     <span class="slider round"></span>
                                 </label>

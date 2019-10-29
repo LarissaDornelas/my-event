@@ -39,7 +39,7 @@ class UserController extends Controller
             if ($user != null) {
                 return view('user/userDetails', ['userData' => $user]);
             } else {
-                return redirect('/users')->with('error', 'Houve um erro ao abrir usuário');
+                return redirect('/user')->with('error', 'Houve um erro ao abrir usuário');
             }
         } catch (\Exception $e) { }
     }
@@ -65,9 +65,9 @@ class UserController extends Controller
 
             User::create($newUser);
 
-            return redirect('/users')->with('status', 'Usuário cadastrado com sucesso');
+            return redirect('/user')->with('status', 'Usuário cadastrado com sucesso');
         } catch (\Exception $e) {
-            return redirect('/users')->with('error', 'Houve um erro ao cadastrar usuário');
+            return redirect('/user')->with('error', 'Houve um erro ao cadastrar usuário');
         }
     }
 
@@ -87,16 +87,9 @@ class UserController extends Controller
         try {
             User::where('id', $id)->first()
                 ->update($newUser);
-            return redirect('/users/' . $id)->with('status', 'Dados atualizados com sucesso');
+            return redirect('/user/' . $id)->with('status', 'Dados atualizados com sucesso');
         } catch (\Exception $e) {
-            return redirect('/users/' . $id)->with('error', 'Houve um erro ao atualizar os dados. Tente novamente mais tarde.');
+            return redirect('/user/' . $id)->with('error', 'Houve um erro ao atualizar os dados. Tente novamente mais tarde.');
         }
-    }
-
-    public function delete($id)
-    {
-        try {
-            $user = User::where('id', $id)->first()->delete();
-        } catch (\Exception $e) { }
     }
 }
