@@ -36,21 +36,32 @@
 
 
                         <div class="form-row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="name">Nome do Fornecedor</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Nome"
                                     required>
                             </div>
+                            <div class="col-md-6">
+                                <label for="name">Categoria</label>
+                                <select id="providerCategory_id" class="form-control">
+                                    <option selected>Escolher...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
                             <div class="col-md-12">
                                 <label for="name">Descrição</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome"
-                                    required>
+                                <textarea class="form-control" id="name" name="description" placeholder="Descrição"
+                                    rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
-                                <label for="cpf">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                    required>
                             </div>
                             <div class="col-md-6">
                                 <label for="phone">Telefone</label>
@@ -60,14 +71,14 @@
                         </div>
                         <div class="form-row">
                             <div class="col-6">
-                                <label for="email">Celular</label>
-                                <input type="text" class="form-control" id="cellPhone" name="cellPhone"
-                                    placeholder="Celular" required>
+                                <label for="instagram_name">Instagram</label>
+                                <input type="text" class="form-control" id="instagram_name" name="instagram_name"
+                                    placeholder="Conta do instagram" required>
                             </div>
                             <div class="col-6">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                                    required>
+                                <label for="facebook_name">Facebook</label>
+                                <input type="text" class="form-control" id="facebook_name" name="facebook_name"
+                                    placeholder="Conta do Facebook" required>
                             </div>
                         </div>
                         <div class="switches">
@@ -79,16 +90,6 @@
                                         <span class="slider round"></span>
                                     </label>
                                     <label for="active">Ativo</label>
-                                </div>
-                            </div>
-                            <div class="form-row ">
-                                <div class="form-group ">
-                                    <label class="switch">
-                                        <input name="admin" value="true" type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <label for="admin">Administrador</label>
-
                                 </div>
                             </div>
 
