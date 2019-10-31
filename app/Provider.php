@@ -21,7 +21,7 @@ class Provider extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'phone', 'description', 'providerCategory_id', 'website', 'instagram_name', 'facebook_name', 'active'];
+    protected $fillable = ['name', 'phone', 'description', 'providerCategory_id', 'website', 'email', 'instagram_name', 'facebook_name', 'active'];
 
     /**
      * The attributes excluded from the model's JSON form.

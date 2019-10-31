@@ -1,10 +1,10 @@
 @extends('baseAdmin')
 @section('pageTitle')
-<h1>Categorias de Eventos</h1>
+<h1>Categorias de Fornecedor</h1>
 @endsection
 @section('breadcrumbLinks')
 <li class="breadcrumb-item"><a class="general-links" href="{{ route('dashboard')}}">Dashboard</a></li>
-<li class="breadcrumb-item active">Categorias de Evento</li>
+<li class="breadcrumb-item active">Categorias de Fornecedor</li>
 @endsection
 @section('pageContent')
 @if (session('status'))
@@ -48,7 +48,7 @@
         <div class="card-category_image"> <img src="{{asset('assets/images/category-create.png')}}" /> </div>
         <div class="card-category_label title-white">
 
-            <p class="title-black">Não encontrou a categoria de eventos que procurava?</p>
+            <p class="title-black">Não encontrou a categoria de fornecedor que procurava?</p>
             <button class="btn btn-app-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Cadastrar
                 Categoria</button>
         </div>

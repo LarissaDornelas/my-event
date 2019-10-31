@@ -736,6 +736,22 @@ html.rtl
     z-index: 999;
 }
 
+.arrow-back {
+    display: inline-block;
+    left: 0px;
+    position: relative;
+    top: 10px;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    width: 400px;
+    z-index: 999;
+}
+.arrow-back a {
+    color: black;
+}
+.arrow-back a:hover {
+    color: #581d22;
+}
 .hamburger .line {
     background-color: #252525;
     display: block;

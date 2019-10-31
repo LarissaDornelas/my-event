@@ -118,7 +118,8 @@
             <br>
         </div>
         <div class="card-actions">
-            <button type='button' class='card-action-readMore btn-card'>Ver detalhes</button>
+            <button type='button' class='card-action-readMore btn-card'
+                onclick="window.location.href='{{route('getOneEvent', ['id'=> 1])}}'">Ver detalhes</button>
         </div>
     </div>
 

@@ -27,4 +27,10 @@ class EventController extends Controller
             return view('event/events', ['eventData' => []]);
         }
     }
+
+    public function getOne($id)
+    {
+
+        return view('event/eventDetail');
+    }
 }

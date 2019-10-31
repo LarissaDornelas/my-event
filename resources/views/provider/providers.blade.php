@@ -43,10 +43,15 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="name">Categoria</label>
-                                <select id="providerCategory_id" class="form-control">
-                                    <option selected>Escolher...</option>
-                                    <option>...</option>
+                                <select id="providerCategory_id" name="providerCategory_id" class="form-control">
+                                    <option value='' selected>Escolher...</option>
+                                    @foreach ($providerCategories as $item)
+                                    <option value={{$item->id}}>{{$item->name}}</option>
+                                    @endforeach
+
                                 </select>
+                                <span class="category-label">Não encontrou a categoria desejada? Cadastre <a
+                                        href="{{route('getAllProviderCategories')}}">aqui</a></span>
                             </div>
 
                         </div>
@@ -84,7 +89,7 @@
                         <div class="switches">
                             <div class="form-row ">
 
-                                <div class="form-group ">
+                                <div class="col-6">
                                     <label class="switch">
                                         <input name="active" value="true" type="checkbox" checked>
                                         <span class="slider round"></span>
@@ -141,7 +146,7 @@
             <td>{{$item->name}}</td>
             <td>{{$item->phone}}</td>
             <td>{{$item->email}}</td>
-            <td>{{$item->providerCategory_id}}</td>
+            <td>{{$item->providerCategoryName}}</td>
             <td>@if($item->active)Ativo @else Inativo @endif</td>
             <td>
                 <a id="see-details-ufop" class='general-links'

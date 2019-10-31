@@ -47,9 +47,10 @@ Route::prefix('provider')->middleware('auth')->group(function () {
 
 Route::prefix('event')->middleware('auth')->group(function () {
     Route::get('/', 'EventController@getAll')->name('getAllEvents');
+    Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
+
     /*Route::post('/', 'EventController@create')->name('createEvent');
     Route::put('/{id}', 'EventController@update')->name('updateEvent');
-    Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
     Route::delete('/{id}', 'EventController@delete')->name('deleteEvent');*/
 });
 

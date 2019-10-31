@@ -83,7 +83,8 @@
                                                 <h4>Informações Básicas</h4>
                                                 <div class="birthday-content">
                                                     <span class="contact-title">Categoria:</span>
-                                                    <span class="labelDetail">{{$providerData->category}} </span>
+                                                    <span class="labelDetail">{{$providerData->providerCategoryName}}
+                                                    </span>
                                                 </div>
                                                 <div>
                                                     <span class="contact-title">Ativo:</span>
@@ -112,9 +113,9 @@
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('updateProvider', ['id'=> $providerData->id]) }}" method="POST">
-            @method('PUT')
+        <form action="{{ route('updateProvider', ['id' => $providerData->id]) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar Fornecedor</h5>
@@ -127,34 +128,56 @@
 
 
                     <div class="form-row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="name">Nome do Fornecedor</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome Completo"
-                                required value="{{$providerData->name}}">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome"
+                                value="{{$providerData->name}}" required>
+                        </div>
+                        <div class="col-md-6">
+
+                            <label for="name">Categoria</label>
+                            <select id="providerCategory_id" name="providerCategory_id" class="form-control">
+                                <option value=''>Escolher...</option>
+                                @foreach ($providerCategories as $item)
+                                <option value={{$item->id}} @if($providerData->providerCategory_id ==
+                                    $item->id) selected @endif>{{$item->name}}</option>
+                                @endforeach
+
+                            </select>
+                            <span class="category-label">Não encontrou a categoria desejada? Cadastre <a
+                                    href="{{route('getAllProviderCategories')}}">aqui</a></span>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="name">Descrição</label>
+                            <textarea class="form-control" id="name" name="description" placeholder="Descrição" rows="3"
+                                required>{{$providerData->description}}</textarea>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
-                            <label for="cpf">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF"
-                                value="{{$providerData->cpf}}" required>
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                value="{{$providerData->email}}" required>
                         </div>
                         <div class="col-md-6">
                             <label for="phone">Telefone</label>
-                            <input type="text" class="form-control" id="phone" name="phone"
-                                value="{{$providerData->phone}}" placeholder="Telefone" required>
+                            <input value="{{$providerData->phone}}" type="text" class="form-control" id="phone"
+                                name="phone" placeholder="Telefone" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-6">
-                            <label for="email">Celular</label>
-                            <input type="text" class="form-control" id="cellPhone" name="cellPhone"
-                                value="{{$providerData->cellPhone}}" placeholder="Celular" required>
+                            <label for="instagram_name">Instagram</label>
+                            <input type="text" value="{{$providerData->instagram_name}}" class="form-control"
+                                id="instagram_name" name="instagram_name" placeholder="Conta do instagram" required>
                         </div>
                         <div class="col-6">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                value="{{$providerData->email}}" placeholder="Email" required>
+                            <label for="facebook_name">Facebook</label>
+                            <input type="text" value="{{$providerData->facebook_name}}" class="form-control"
+                                id="facebook_name" name="facebook_name" placeholder="Conta do Facebook" required>
                         </div>
                     </div>
                     <div class="switches">
@@ -169,23 +192,12 @@
                                 <label for="active">Ativo</label>
                             </div>
                         </div>
-                        <div class="form-row ">
-                            <div class="form-group ">
-                                <label class="switch">
-                                    <input name="admin" value="true" type="checkbox" @if($providerData->admin) checked
-                                    @endif>
-                                    <span class="slider round"></span>
-                                </label>
-                                <label for="admin">Administrador</label>
-
-                            </div>
-                        </div>
 
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-app-primary">Salvar Alterações</button>
                 </div>
             </div>

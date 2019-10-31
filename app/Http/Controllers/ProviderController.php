@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Provider;
+use App\ProviderCategory;
+use Illuminate\Support\Facades\DB;
 
 class ProviderController extends Controller
 {
@@ -17,16 +18,20 @@ class ProviderController extends Controller
     {
 
         try {
-            $providers = Provider::all();
+            $providers = DB::table('provider')->join('providerCategory', 'provider.providerCategory_id', '=', 'providerCategory.id')
+                ->select('provider.*', 'providerCategory.name as providerCategoryName')
+                ->get();
+
+            $providerCategories = ProviderCategory::where('active', 1)->get();
 
             if (sizeOf($providers) > 0) {
-                return view('provider/providers', ['providerData' => $providers]);
+                return view('provider/providers', ['providerData' => $providers, 'providerCategories' => $providerCategories]);
             } else {
-                return view('provider/providers', ['providerData' => []]);
+                return view('provider/providers', ['providerData' => [], 'providerCategories' => $providerCategories]);
             }
         } catch (\Exception $e) {
 
-            return view('provider/providers', ['providerData' => []]);
+            return view('provider/providers', ['providerData' => [], 'providerCategories' => []]);
         }
     }
 
@@ -36,20 +41,33 @@ class ProviderController extends Controller
 
 
         try {
-            $provider = Provider::where('id', $id)->first();
+            $provider = DB::table('provider')->join('providerCategory', 'provider.providerCategory_id', '=', 'providerCategory.id')
+                ->select('provider.*', 'providerCategory.name as providerCategoryName')
+                ->where('provider.id', $id)->first();
+
+
+            $providerCategories = ProviderCategory::where('active', 1)->get();
+
             if ($provider != null) {
-                return view('provider/providerDetails', ['providerData' => $provider]);
+                return view('provider/providerDetails', ['providerData' => $provider, 'providerCategories' => $providerCategories]);
             } else {
 
                 return redirect('/provider')->with('error', 'Houve um erro ao abrir fornecedor');
             }
-        } catch (\Exception $e) { }
+        } catch (\Exception $e) {
+
+
+            return redirect('/provider')->with('error', 'Houve um erro ao abrir fornecedor');
+        }
     }
 
     public function create(Request $request)
     {
 
+
         $newProvider = $request->all();
+
+
         if (array_key_exists('active', $newProvider)) {
             $newProvider['active'] = true;
         } else {
@@ -62,6 +80,7 @@ class ProviderController extends Controller
 
             return redirect('/provider')->with('status', 'Fornecedor cadastrado com sucesso');
         } catch (\Exception $e) {
+
             return redirect('/provider')->with('error', 'Houve um erro ao cadastrar fornecedor');
         }
     }
