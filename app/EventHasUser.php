@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EventHasUser extends Model  
+class EventHasUser extends Model
 {
 
-    
+
 
     /**
      * The database table used by the model.
@@ -44,4 +44,5 @@ class EventHasUser extends Model
      */
     protected $dates = [];
 
+    public $timestamps = false;
 }

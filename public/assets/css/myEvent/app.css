@@ -99,9 +99,9 @@ body {
 
 .btn-app-primary,
 .btn-app-primary:focus {
-    color: #fff;
-    background-color: #581d22;
-    border-color: #581d22;
+    color: #fff !important;
+    background-color: #581d22 !important;
+    border-color: #581d22 !important;
 }
 .btn-app-primary:hover {
     color: #fff;
@@ -273,11 +273,11 @@ body {
     background-color: #fff;
 }
 .card-title {
-    margin-top: -1.5em;
-    padding-bottom: 0.5em;
+    margin-top: 0.5em;
     padding-left: 0.5em;
     color: black;
     font-size: 2em;
+    font-weight: 300;
 }
 .card-image {
     width: 100%;
@@ -428,17 +428,19 @@ body {
 
 .tabbable-panel {
     border: 1px solid #eee;
-    padding: 10px;
+    padding: 13px 4px 26px 4px;
+    width: 100%;
 }
 
 /* Default mode */
 .tabbable-line > .nav-tabs {
     border: none;
     margin: 0px;
+    width: 100%;
 }
 .tabbable-line > .nav-tabs > li {
     margin-right: 2px;
-    padding: 2px 61px 11px 61px;
+    /*padding: 2px 61px 11px 61px;*/
     cursor: pointer;
 }
 .tabbable-line > .nav-tabs > li > a {
@@ -483,7 +485,7 @@ body {
     background-color: #fff;
     border: 0;
     border-top: 1px solid #eee;
-    padding: 15px 0;
+    /*padding: 15px 0;*/
 }
 .portlet .tabbable-line > .tab-content {
     padding-bottom: 0;
@@ -511,4 +513,216 @@ body {
     border-top: 0;
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
+}
+
+.countdown {
+    margin: 0 auto;
+}
+.countdown .bloc-time {
+    float: left;
+    margin-right: 45px;
+    text-align: center;
+}
+.countdown .bloc-time:last-child {
+    margin-right: 0;
+}
+.countdown .count-title {
+    display: block;
+    margin-bottom: 15px;
+    font: normal 0.94em "Lato";
+    color: #1a1a1a;
+    text-transform: uppercase;
+}
+.countdown .figure {
+    position: relative;
+    float: left;
+    height: 81px;
+    width: 79px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    -moz-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2),
+        inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+    -webkit-box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2),
+        inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2),
+        inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+}
+.countdown .figure:last-child {
+    margin-right: 0;
+}
+.countdown .figure > span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font: normal 3.94em/91px "Lato";
+    font-weight: 700;
+    color: #581d22;
+}
+.countdown .figure .top:after,
+.countdown .figure .bottom-back:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.countdown .figure .top {
+    z-index: 3;
+    background-color: #f7f7f7;
+    transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 100%;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+    -moz-transform: perspective(200px);
+    -ms-transform: perspective(200px);
+    -webkit-transform: perspective(200px);
+    transform: perspective(200px);
+}
+.countdown .figure .bottom {
+    z-index: 1;
+}
+.countdown .figure .bottom:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+.countdown .figure .bottom-back {
+    z-index: 2;
+    top: 0;
+    height: 50%;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.countdown .figure .bottom-back span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.countdown .figure .top,
+.countdown .figure .top-back {
+    height: 50%;
+    overflow: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.countdown .figure .top-back {
+    z-index: 4;
+    bottom: 0;
+    background-color: #fff;
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -moz-transform: perspective(200px) rotateX(180deg);
+    -ms-transform: perspective(200px) rotateX(180deg);
+    -webkit-transform: perspective(200px) rotateX(180deg);
+    transform: perspective(200px) rotateX(180deg);
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.countdown .figure .top-back span {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.event-top-card {
+    padding: 0px 1px 119px;
+    animation: scl 0.5s ease-in-out;
+    transform-origin: left center;
+    transition: 0.4s;
+}
+
+.event-countdown {
+    padding: 0px 1px 364px;
+    animation: scl 0.5s ease-in-out;
+    transform-origin: left center;
+    transition: 0.4s;
+}
+
+.nav-event {
+    height: 55px;
+    margin-bottom: -27px !important;
+}
+
+.card-img-detail {
+    animation: scl 0.5s ease-in-out;
+    transform-origin: left center;
+    transition: 0.4s;
+}
+
+.bottom-itens {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom-image:hover {
+    opacity: 0.6;
+}
+
+.bottom-image {
+    max-width: 53px;
+    margin-bottom: 5px;
+}
+
+.image-card {
+    background-repeat: no-repeat !important;
+    background-size: 355px !important;
+    background-position: center !important;
+    width: auto;
+    height: 188px;
+    border: 2px solid #cac4c4;
+}
+
+.image-event-card {
+    background-repeat: no-repeat !important;
+    background-size: 856px !important;
+    background-position: center !important;
+    width: auto;
+    height: 500px;
+    border: 2px solid #efefef;
+}
+.image-card img {
+    width: 100%;
+    height: 100%;
+}
+
+.nav-settings a {
+    color: #581d22 !important;
+}
+
+.deleteIcon {
+    cursor: pointer;
+}
+
+.deleteIcon:hover {
+    opacity: 0.6;
 }

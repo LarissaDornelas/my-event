@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model  
+class Event extends Model
 {
 
-    
+
 
     /**
      * The database table used by the model.
@@ -21,7 +21,10 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'date', 'description', 'maxPrice', 'currentPrice', 'created_at', 'updated_at', 'active', 'eventType_id'];
+    protected $fillable = [
+        'name', 'date', 'description', 'maxPrice', 'currentPrice', 'created_at',
+        'updated_at', 'completed', 'canceled', 'eventCategory_id', 'hour', 'image_url',
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -35,7 +38,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $casts = ['active' => 'boolean'];
+    protected $casts = ['completed' => 'boolean', 'canceled' => 'boolean'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -43,5 +46,4 @@ class Event extends Model
      * @var array
      */
     protected $dates = ['date', 'created_at', 'updated_at'];
-
 }

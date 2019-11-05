@@ -92,7 +92,7 @@ $( function () {
 		ykeys: [ 'item1' ],
 		labels: [ 'Item 1' ],
 		gridLineColor: '#eef0f2',
-		lineColors: [ '#007BFF' ],
+		lineColors: [ '#581D22' ],
 		lineWidth: 1,
 		hideHover: 'auto'
 	} );
@@ -112,7 +112,7 @@ $( function () {
 			value: 20
         } ],
 		resize: true,
-		colors: [ '#007BFF', '#28A745', '#DC3545' ]
+		colors: [ '#581D22', '#28A745', '#DC3545' ]
 	} );
 
 
@@ -158,7 +158,7 @@ $( function () {
 
 
         ],
-		lineColors: [ '#28A745', '#DC3545', '#007BFF' ],
+		lineColors: [ '#28A745', '#DC3545', '#581D22' ],
 		xkey: 'period',
 		ykeys: [ 'smartphone', 'windows', 'mac' ],
 		labels: [ 'Phone', 'Windows', 'Mac' ],
@@ -217,12 +217,12 @@ $( function () {
 		labels: [ 'Phone', 'Windows', 'Mac' ],
 		pointSize: 3,
 		fillOpacity: 0,
-		pointStrokeColors: [ '#28A745', '#007BFF', '#DC3545' ],
+		pointStrokeColors: [ '#28A745', '#581D22', '#DC3545' ],
 		behaveLikeLine: true,
 		gridLineColor: '#e0e0e0',
 		lineWidth: 3,
 		hideHover: 'auto',
-		lineColors: [ '#28A745', '#007BFF', '#DC3545' ],
+		lineColors: [ '#28A745', '#581D22', '#DC3545' ],
 		resize: true
 
 	} );
@@ -271,13 +271,13 @@ $( function () {
 		labels: [ 'Site A', 'Site B' ],
 		pointSize: 0,
 		fillOpacity: 0.4,
-		pointStrokeColors: [ '#b4becb', '#007BFF' ],
+		pointStrokeColors: [ '#b4becb', '#581D22' ],
 		behaveLikeLine: true,
 		gridLineColor: '#e0e0e0',
 		lineWidth: 0,
 		smooth: false,
 		hideHover: 'auto',
-		lineColors: [ '#b4becb', '#007BFF' ],
+		lineColors: [ '#b4becb', '#581D22' ],
 		resize: true
 
 	} );

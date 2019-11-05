@@ -48,4 +48,6 @@ $(document).ready(function() {
             circle.remove();
         }, 500);
     }
+
+    $(".select-app-search").selectpicker();
 });

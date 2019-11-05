@@ -62,7 +62,7 @@
 		xaxis: {
 			show: false
 		},
-		colors: [ "#007BFF" ],
+		colors: [ "#581D22" ],
 		grid: {
 			color: "transparent",
 			hoverable: true,
@@ -129,7 +129,7 @@ $( function () {
 			min: -1.2,
 			max: 1.2
 		},
-		colors: [ "#007BFF", "#DC3545" ],
+		colors: [ "#581D22", "#DC3545" ],
 		grid: {
 			color: "#fff",
 			hoverable: true,
@@ -163,7 +163,7 @@ $( function () {
 		{
 			label: "Success",
 			data: 3,
-			color: "#007BFF"
+			color: "#581D22"
         },
 		{
 			label: "Danger",
@@ -244,7 +244,7 @@ $( function () {
 	};
 	var chart1Data = {
 		label: "chart1",
-		color: "#007BFF",
+		color: "#581D22",
 		data: [
       [ 1354521600000, 6322 ],
       [ 1355040000000, 6360 ],
@@ -295,7 +295,7 @@ $( function () {
 	};
 	var flotBarData = {
 		label: "flotBar",
-		color: "#007BFF",
+		color: "#581D22",
 		data: [
       [ 1354521600000, 1000 ],
       [ 1355040000000, 2000 ],

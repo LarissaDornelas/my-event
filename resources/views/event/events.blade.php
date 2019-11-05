@@ -23,7 +23,7 @@
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <form action="{{ route('createUser') }}" method="POST">
+        <form action="{{ route('createEvent') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -38,57 +38,50 @@
 
                     <div class="form-row">
                         <div class="col-md-12">
-                            <label for="name">Nome Completo</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome Completo"
+                            <label for="name">Nome do evento</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome do evento"
                                 required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
-                            <label for="cpf">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" required>
+                            <label for="cpf">Data</label>
+                            <input type="date" class="form-control" id="date" name="date" placeholder="Data" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="phone">Telefone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone"
+                            <label for="cpf">Horário</label>
+                            <input type="text" class="form-control" id="hour" name="hour" placeholder="Horário"
                                 required>
                         </div>
+
                     </div>
                     <div class="form-row">
-                        <div class="col-6">
-                            <label for="email">Celular</label>
-                            <input type="text" class="form-control" id="cellPhone" name="cellPhone"
-                                placeholder="Celular" required>
+                        <div class="col-md-6">
+                            <label for="name">Descrição</label>
+                            <textarea type="text" class="form-control" rows="3" id="description" name="description"
+                                placeholder="Escreva aqui uma descrição sobre o evento... " required></textarea>
                         </div>
-                        <div class="col-6">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"
-                                required>
-                        </div>
-                    </div>
-                    <div class="switches">
-                        <div class="form-row ">
+                        <div class="col-md-6">
+                            <label for="name">Categoria</label>
+                            <select id="providerCategory_id" name="eventCategory_id" class="form-control">
+                                <option value='1' selected>Escolher...</option>
+                                @foreach ($eventCategories as $item)
+                                <option value={{$item->id}}>{{$item->name}}</option>
+                                @endforeach
 
-                            <div class="form-group ">
-                                <label class="switch">
-                                    <input name="active" value="true" type="checkbox" checked>
-                                    <span class="slider round"></span>
-                                </label>
-                                <label for="active">Ativo</label>
-                            </div>
-                        </div>
-                        <div class="form-row ">
-                            <div class="form-group ">
-                                <label class="switch">
-                                    <input name="admin" value="true" type="checkbox">
-                                    <span class="slider round"></span>
-                                </label>
-                                <label for="admin">Administrador</label>
 
-                            </div>
+
+                            </select>
+                            <span class="category-label">Não encontrou a categoria desejada? Cadastre <a
+                                    href="{{route('getAllEventCategories')}}">aqui</a></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventImage">Adicionar uma imagem</label>
+                            <input type="file" name="image" class="form-control-file" id="image">
                         </div>
 
                     </div>
+
                 </div>
 
                 <div class="modal-footer">
@@ -99,29 +92,47 @@
         </form>
     </div>
 </div>
-
+@if (session('status'))
+<div class="alert alert-success alert-dismissible fade show message-alert" id="alert" role="alert">
+    {{ session('status') }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
+@if (session('error'))
+<div class="alert alert-danger alert-dismissible fade show message-alert" id="alert" role="alert">
+    {{session('error')}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 <div class="cards-row">
 
+    @foreach ($eventData as $item)
     <div class="card-mini">
-        <img src='{{asset('assets/images/marrie-default.jpg')}}' class="card-image" />
+        <div class="image-card" style="background: url({{asset('images/' . $item->image_url)}}) center" .></div>
+
         <div class="card-title">
-            Camila e Marcos
+            {{$item->name}}
         </div>
         <div class="card-desc">
-            <i class="ti-bookmark-alt"> Casamento com Recepção</i>
+            <i class="ti-bookmark-alt"> {{$item->eventCategoryName}}</i>
             <br>
-            <i class="ti-calendar"> 03/10/2020</i>
+            <i class="ti-calendar"> {{$item->date}}</i>
             <br>
-            <i class="ti-alarm-clock"> 19hrs</i>
+            <i class="ti-alarm-clock"> {{$item->hour}}</i>
             <br>
 
             <br>
         </div>
         <div class="card-actions">
             <button type='button' class='card-action-readMore btn-card'
-                onclick="window.location.href='{{route('getOneEvent', ['id'=> 1])}}'">Ver detalhes</button>
+                onclick="window.location.href='{{route('getOneEvent', ['id'=> $item->id])}}'">Ver detalhes</button>
         </div>
     </div>
+    @endforeach
 
 
 

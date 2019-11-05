@@ -45,17 +45,23 @@ Route::prefix('provider')->middleware('auth')->group(function () {
 });
 
 
-Route::prefix('event')->middleware('auth')->group(function () {
-    Route::get('/', 'EventController@getAll')->name('getAllEvents');
-    Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
-
-    /*Route::post('/', 'EventController@create')->name('createEvent');
-    Route::put('/{id}', 'EventController@update')->name('updateEvent');
-    Route::delete('/{id}', 'EventController@delete')->name('deleteEvent');*/
-});
-
 Route::prefix('event/category')->middleware('auth')->group(function () {
     Route::get('/', 'EventCategoryController@getAll')->name('getAllEventCategories');
     Route::post('/', 'EventCategoryController@create')->name('createEventCategory');
     Route::put('/{id}', 'EventCategoryController@update')->name('updateEventCategory');
+});
+
+Route::prefix('event')->middleware('auth')->group(function () {
+    Route::get('/', 'EventController@getAll')->name('getAllEvents');
+    Route::post('/', 'EventController@create')->name('createEvent');
+    Route::post('/{id}', 'EventController@update')->name('updateEvent');
+    Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
+    Route::get('/{id}/tasks', 'TaskController@getEventTasks')->name('getEventTasks');
+    Route::get('/{id}/settings', 'EventController@viewSettings')->name('settings');
+    Route::post('/{id}/settings', 'EventController@update')->name('updateEvent');
+    Route::post('/{id}/integration', 'EventController@addAccountToEvent')->name('accountIntegration');
+    Route::delete('/{id}/integration', 'EventController@deleteAccountFromEvent')->name('accountRemove');
+    /*
+    Route::put('/{id}', 'EventController@update')->name('updateEvent');
+    Route::delete('/{id}', 'EventController@delete')->name('deleteEvent');*/
 });

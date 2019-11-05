@@ -184,30 +184,39 @@ Meu Evento
 
 
     <div class="row">
-        <div class="col-md-12 d-flex justify-content-center">
+        <div class="col-md-12  justify-content-center">
 
 
             <div class="tabbable-panel">
                 <div class="tabbable-line">
-                    <ul class="nav nav-tabs ">
-                        <li class="active">
-                            <a> Meu Evento </a>
+                    <ul class="nav  nav-pills nav-justified nav-tabs ">
+
+                        <li class="nav-item nav-event @if(Route::is('getOneEvent')) active @endif">
+                            <a href="{{route('getOneEvent', ['id' => Request::segment(2)])}}" class="nav-link"> Meu
+                                Evento </a>
                         </li>
-                        <li>
-                            <a> Fornecedores</a>
+                        <li class="nav-item nav-event @if(Route::is('getEventTasks')) active @endif"">
+                            <a href=" {{route('getEventTasks', ['id' => Request::segment(2)])}}" class="nav-link">
+                            Tarefas </a>
                         </li>
-                        <li>
-                            <a> Dicas e Observações </a>
+                        <li class="nav-item nav-event">
+                            <a class="nav-link"> Fornecedores</a>
                         </li>
-                        <li>
-                            <a> Tarefas </a>
+                        <li class="nav-item nav-event">
+                            <a class="nav-link"> Dicas e Observações </a>
                         </li>
-                        <li>
-                            <a> Lista de Convidados </a>
+
+                        <li class="nav-item nav-event">
+                            <a class="nav-link"> Lista de Convidados </a>
                         </li>
-                        <li>
-                            <a> Orçamento </a>
+                        <li class="nav-item nav-event">
+                            <a class="nav-link"> Orçamento </a>
                         </li>
+                        <li class="nav-item nav-event @if(Route::is('settings')) active @endif"">
+                            <a href=" {{route('settings', ['id' => Request::segment(2)])}}" class="nav-link">
+                            Configurações</a>
+                        </li>
+
                     </ul>
 
                 </div>
@@ -221,41 +230,16 @@ Meu Evento
 
 
 
-    <div class="content-wrap">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                @yield('pageTitle')
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-
-                                    @yield('breadcrumbLinks')
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                </div>
-                @yield('pageContent')
-                <div class="row">
-                    <!--div-- class="col-lg-12">
+    @yield('pageContent') <div class="row">
+        <!--div-- class="col-lg-12">
                                 <div class="footer">
                                     <p>2018 © Admin Board. - <a href="#">example.com</a></p>
                                 </div>
                             </!--div-->
-                </div>
-                </section>
-            </div>
-        </div>
+    </div>
+    </section>
+    </div>
+    </div>
     </div>
     <div id="search">
         <button type="button" class="close">×</button>

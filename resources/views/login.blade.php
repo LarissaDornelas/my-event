@@ -61,7 +61,7 @@ Meu Evento - Login
                         <!-- Button -->
 
 
-                        <button id="btn-login" type="submit" class="btn btn-login">Entrar
+                        <button id="btn-login" type="submit" class="btn btn-app-primary" style="width:100%">Entrar
                         </button>
 
 
