@@ -62,11 +62,16 @@ class UserController extends Controller
         $newUser['password'] = $hashedRandomPassword;
 
         try {
+            $user = User::where('email', $newUser['email'])->get();
 
+            if (sizeOf($user) > 0) {
+                return redirect('/user')->with('error', 'Email já cadastrado.');
+            }
             User::create($newUser);
 
             return redirect('/user')->with('status', 'Usuário cadastrado com sucesso');
         } catch (\Exception $e) {
+
             return redirect('/user')->with('error', 'Houve um erro ao cadastrar usuário');
         }
     }
