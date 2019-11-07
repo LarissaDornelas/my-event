@@ -7,7 +7,9 @@ use App\Event;
 use App\EventCategory;
 use App\EventHasUser;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller
 {
@@ -18,13 +20,57 @@ class EventController extends Controller
 
     public function getAll()
     {
-
         try {
-            $events = DB::table('event')->join('eventCategory', 'event.eventCategory_id', '=', 'eventCategory.id')
-                ->select('event.*', 'eventCategory.name as eventCategoryName')
-                ->orderBy('date')->get();
-            $eventCategories = EventCategory::where('active', 1)->get();
+            if (Session::get('admin')[0]) {
+                $events = DB::table('event')->join('eventCategory', 'event.eventCategory_id', '=', 'eventCategory.id')
+                    ->select('event.*', 'eventCategory.name as eventCategoryName')
+                    ->where('event.completed', 0)
+                    ->orderBy('date')->get();
 
+                $eventCategories = EventCategory::where('active', 1)->get();
+            } else {
+                $id = Auth::user()->id;
+                $events = DB::table('event_has_user')
+                    ->join('event', 'event_has_user.event_id', '=', 'event.id')
+                    ->join('eventCategory', 'event.eventCategory_id', '=', 'eventCategory.id')
+                    ->select('event.*', 'eventCategory.name as eventCategoryName')->where('event_has_user.user_id', $id)
+                    ->where('event.completed', 0)
+                    ->orderBy('date')->get();
+
+                $eventCategories = [];
+            }
+            if (sizeOf($events) > 0) {
+                return view('event/events', ['eventData' => $events, 'eventCategories' => $eventCategories]);
+            } else {
+                return view('event/events', ['eventData' => [],  'eventCategories' => $eventCategories]);
+            }
+        } catch (\Exception $e) {
+
+            return view('event/events', ['eventData' => [], 'eventCategories' => []]);
+        }
+    }
+
+
+    public function getCompleted()
+    {
+        try {
+            if (Session::get('admin')[0]) {
+                $events = DB::table('event')->join('eventCategory', 'event.eventCategory_id', '=', 'eventCategory.id')
+                    ->select('event.*', 'eventCategory.name as eventCategoryName')
+                    ->where('event.completed', 1)
+                    ->orderBy('date')->get();
+                $eventCategories = EventCategory::where('active', 1)->get();
+            } else {
+                $id = Auth::user()->id;
+                $events = DB::table('event_has_user')
+                    ->join('event', 'event_has_user.event_id', '=', 'event.id')
+                    ->join('eventCategory', 'event.eventCategory_id', '=', 'eventCategory.id')
+                    ->select('event.*', 'eventCategory.name as eventCategoryName')->where('event_has_user.user_id', $id)
+                    ->where('event.completed', 1)
+                    ->orderBy('date')->get();
+
+                $eventCategories = [];
+            }
             if (sizeOf($events) > 0) {
                 return view('event/events', ['eventData' => $events, 'eventCategories' => $eventCategories]);
             } else {
@@ -38,33 +84,64 @@ class EventController extends Controller
 
     public function getOne($id)
     {
-        $event = Event::where('id', $id)->first();
+        try {
+            $event = Event::where('id', $id)->first();
+            if (Session::get('admin')[0]) {
 
-        return view('event/eventDetail', ['eventData' => $event]);
+
+                return view('event/eventDetail', ['eventData' => $event]);
+            } else {
+                $exists = EventHasUser::where([['event_id', $id], ['user_id', Auth::user()->id]])->get();
+
+                if (sizeOf($exists) > 0) {
+                    return view('event/eventDetail', ['eventData' => $event]);
+                } else {
+                    return redirect('/event')->with('error', 'Permissão necessária para acessar este evento.');
+                }
+            }
+        } catch (\Exception $e) {
+
+            return redirect('/event')->with('error', 'Falha ao abrir evento. Tente novamente mais tarde');
+        }
     }
 
     public function create(Request $request)
     {
+        if (Session::get('admin')[0]) {
 
-        $imageName = 'no-image.png';
-        if ($request->image) {
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $user = User::where('email', $request->account)->get();
 
-            $request->image->move(public_path('images'), $imageName);
-        }
-        $newEvent = $request->except('image');
-        $newEvent['image_url'] = $imageName;
-        $newEvent['completed'] = 0;
-        try {
-            Event::create($newEvent);
+            if (sizeOf($user) > 0) {
+                $imageName = 'no-image.png';
+                if ($request->image) {
+                    $request->validate([
+                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    ]);
+                    $imageName = time() . '.' . $request->image->getClientOriginalExtension();
 
-            return redirect('/event')->with('status', 'Evento cadastrado com sucesso');
-        } catch (\Exception $e) {
+                    $request->image->move(public_path('images'), $imageName);
+                }
+                $newEvent = $request->except('image', 'account');
+                $newEvent['image_url'] = $imageName;
+                $newEvent['completed'] = 0;
+                try {
+                    $event = Event::create($newEvent);
 
-            return redirect('/event')->with('error', 'Falha ao cadastrar evento');
+                    EventHasUser::create([
+                        'user_id' => $user[0]->id,
+                        'event_id' => $event->id
+                    ]);
+
+                    return redirect('/event')->with('status', 'Evento cadastrado com sucesso');
+                } catch (\Exception $e) {
+                    dd($e);
+                    return redirect('/event')->with('error', 'Falha ao cadastrar evento');
+                }
+            } else {
+                return redirect('/event')->with('error', 'Email não existente no sistema.');
+            }
+
+            return redirect('/event')->with('error', 'Permissão necessária para cadastrar eventos.');
         }
     }
 
@@ -80,8 +157,18 @@ class EventController extends Controller
                 ->select('event.*', 'eventCategory.name as eventCategoryName')
                 ->where('event.id', $id)->get();
             $eventCategories = EventCategory::where('active', 1)->get();
+            if (Session::get('admin')[0]) {
 
-            return view('event/settings/eventSettings', ['usersData' => $users->except('password'), 'eventData' => $event[0], 'eventCategories' => $eventCategories]);
+                return view('event/settings/eventSettings', ['usersData' => $users->except('password'), 'eventData' => $event[0], 'eventCategories' => $eventCategories]);
+            } else {
+                $exists = EventHasUser::where([['event_id', $id], ['user_id', Auth::user()->id]])->get();
+
+                if (sizeOf($exists) > 0) {
+                    return view('event/settings/eventSettings', ['usersData' => $users->except('password'), 'eventData' => $event[0], 'eventCategories' => $eventCategories]);
+                } else {
+                    return redirect('/event')->with('error', 'Permissão necessária para acessar este evento.');
+                }
+            }
         } catch (\Exception $e) {
             dd($e);
         }
@@ -95,7 +182,7 @@ class EventController extends Controller
 
             if (sizeOf($user) > 0) {
                 $user = $user[0];
-                $existsAccount = EventHasUser::where('user_id', $user->id)->get();
+                $existsAccount = EventHasUser::where([['user_id', $user->id], ['event_id', $id]])->get();
                 if (sizeOf($existsAccount) == 0) {
                     EventHasUser::create([
                         'user_id' => $user->id,
@@ -139,6 +226,7 @@ class EventController extends Controller
         $newEvent['completed'] = 0; */
 
         $event = $request->except("_token");
+
         try {
             Event::where('id', $id)->update($event);
             return redirect('event/' .  $id . '/settings');

@@ -25,19 +25,19 @@ Route::get('/', 'DashboardController@initialScreen')->middleware('auth')->name('
 
 
 Route::prefix('user')->middleware('auth')->group(function () {
-    Route::get('/', 'UserController@getAll')->name('getAllUsers');
+    Route::middleware('admin')->get('/', 'UserController@getAll')->name('getAllUsers');
     Route::post('/', 'UserController@create')->name('createUser');
     Route::put('/{id}', 'UserController@update')->name('updateUser');
     Route::get('/{id}', 'UserController@getOne')->name('getOneUser');
 });
 
-Route::prefix('provider/category')->middleware('auth')->group(function () {
+Route::prefix('provider/category')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'ProviderCategoryController@getAll')->name('getAllProviderCategories');
     Route::post('/', 'ProviderCategoryController@create')->name('createProviderCategory');
     Route::put('/{id}', 'ProviderCategoryController@update')->name('updateProviderCategory');
 });
 
-Route::prefix('provider')->middleware('auth')->group(function () {
+Route::prefix('provider')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'ProviderController@getAll')->name('getAllProviders');
     Route::post('/', 'ProviderController@create')->name('createProvider');
     Route::put('/{id}', 'ProviderController@update')->name('updateProvider');
@@ -45,7 +45,7 @@ Route::prefix('provider')->middleware('auth')->group(function () {
 });
 
 
-Route::prefix('event/category')->middleware('auth')->group(function () {
+Route::prefix('event/category')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', 'EventCategoryController@getAll')->name('getAllEventCategories');
     Route::post('/', 'EventCategoryController@create')->name('createEventCategory');
     Route::put('/{id}', 'EventCategoryController@update')->name('updateEventCategory');
@@ -53,7 +53,7 @@ Route::prefix('event/category')->middleware('auth')->group(function () {
 
 Route::prefix('event')->middleware('auth')->group(function () {
     Route::get('/', 'EventController@getAll')->name('getAllEvents');
-    Route::post('/', 'EventController@create')->name('createEvent');
+    Route::middleware('admin')->post('/', 'EventController@create')->name('createEvent');
     Route::post('/{id}', 'EventController@update')->name('updateEvent');
     Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
     Route::get('/{id}/tasks', 'TaskController@getEventTasks')->name('getEventTasks');

@@ -255,8 +255,15 @@
                                                         <input type="file" name="image" class="form-control-file"
                                                             id="image">
                                                     </div>
-
                                                 </div>
+                                                <div class="form-group ">
+                                                    <label class="switch">
+                                                        <input name="completed" value=1 type="checkbox">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                    <label for="active">Concluído</label>
+                                                </div>
+
 
                                             </div>
 

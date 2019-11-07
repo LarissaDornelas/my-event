@@ -1,4 +1,4 @@
-@extends('baseAdmin')
+@extends(Session::get('admin')[0] ? 'baseAdmin' : 'baseDefault')
 @section('pageTitle')
 <h1>Eventos</h1>
 @endsection
@@ -13,13 +13,15 @@
         <div class="col-lg-4 ">
             <input type="text" class="form-control" id="validationDefault01" placeholder="Pesquisar">
         </div>
-        <div class="col-lg-6">
+        @if(Session::get('admin')[0]) <div class="col-lg-6">
             <button class="btn btn-app-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Cadastrar
                 Evento</button>
-        </div>
+        </div>@endif
 
     </div>
 </div>
+@if(Session::get('admin')[0])
+
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -37,10 +39,16 @@
 
 
                     <div class="form-row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="name">Nome do evento</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nome do evento"
                                 required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="account">Adicionar conta ao evento</label>
+                            <input type="text" name="account" class="form-control" id="image"
+                                placeholder="Adicionar email referente ao evento" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -80,6 +88,7 @@
                             <input type="file" name="image" class="form-control-file" id="image">
                         </div>
 
+
                     </div>
 
                 </div>
@@ -92,6 +101,8 @@
         </form>
     </div>
 </div>
+@endif
+
 @if (session('status'))
 <div class="alert alert-success alert-dismissible fade show message-alert" id="alert" role="alert">
     {{ session('status') }}
@@ -108,6 +119,7 @@
     </button>
 </div>
 @endif
+
 <div class="cards-row">
 
     @foreach ($eventData as $item)

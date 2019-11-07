@@ -48,6 +48,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
 
+
         $email = $request['email'];
         $password = $request['password'];
         try {
@@ -63,8 +64,13 @@ class LoginController extends Controller
 
                 Auth::loginUsingId($user->id);
 
+                $request->session()->put('admin', [($user->admin)]);
 
-                return redirect('/');
+                if ($user->admin) {
+                    return redirect('/');
+                } else {
+                    return redirect('/event');
+                }
             } else {
 
                 return redirect('/login')->with('error', 'test');

@@ -8,6 +8,6 @@ class DashboardController extends Controller
 {
     public function initialScreen()
     {
-        return view('baseAdmin');
+        return view('home');
     }
 }

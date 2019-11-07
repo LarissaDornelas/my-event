@@ -6,14 +6,41 @@ Meu Evento
 
 <body style="background:#f9f9f9">
 
-    <div class="header" style="margin-left: 0px!important">
+    <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+        <div class="nano">
+            <div class="nano-content">
+                <div class="logo"><a href="index.html">
+                        <!-- <img src="assets/images/logo.png" alt="" /> --><span>MEU EVENTO</span></a></div>
+                <ul>
+
+                    <li {!! Route::is('getAllEvents') ? "class='active'" : '' !!}><a
+                            href="{{ route('getAllEvents')}}"><i class="ti-calendar"></i>
+                            Meus Eventos </a>
+                    </li>
+
+                    <li><a><i class="ti-settings"></i>
+                            Configurações </a>
+                    </li>
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /# sidebar -->
+
+
+    <div class="header">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="float-left">
-                        <div class="arrow-back">
-                            <a href="{{route('getAllEvents')}}"> <i class="ti-arrow-left"></i> <span
-                                    style="margin-left: 9px;">Voltar para menu principal</span></a>
+                        <div class="hamburger sidebar-toggle">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
                         </div>
                     </div>
                     <div class="float-right">
@@ -180,63 +207,41 @@ Meu Evento
 
 
 
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 p-r-0 title-margin-right">
+                        <div class="page-header">
+                            <div class="page-title">
+                                @yield('pageTitle')
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 p-l-0 title-margin-left">
+                        <div class="page-header">
+                            <div class="page-title">
+                                <ol class="breadcrumb">
 
-
-
-    <div class="row">
-        <div class="col-md-12  justify-content-center">
-
-
-            <div class="tabbable-panel">
-                <div class="tabbable-line">
-                    <ul class="nav  nav-pills nav-justified nav-tabs ">
-
-                        <li class="nav-item nav-event @if(Route::is('getOneEvent')) active @endif">
-                            <a href="{{route('getOneEvent', ['id' => Request::segment(2)])}}" class="nav-link"> Meu
-                                Evento </a>
-                        </li>
-                        <li class="nav-item nav-event @if(Route::is('getEventTasks')) active @endif"">
-                            <a href=" {{route('getEventTasks', ['id' => Request::segment(2)])}}" class="nav-link">
-                            Tarefas </a>
-                        </li>
-                        <li class="nav-item nav-event">
-                            <a class="nav-link"> Fornecedores</a>
-                        </li>
-                        <li class="nav-item nav-event">
-                            <a class="nav-link"> Dicas e Observações </a>
-                        </li>
-
-                        <li class="nav-item nav-event">
-                            <a class="nav-link"> Orçamento </a>
-                        </li>
-                        <li class="nav-item nav-event @if(Route::is('settings')) active @endif"">
-                            <a href=" {{route('settings', ['id' => Request::segment(2)])}}" class="nav-link">
-                            Configurações</a>
-                        </li>
-
-                    </ul>
-
+                                    @yield('breadcrumbLinks')
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /# column -->
                 </div>
+                @yield('pageContent')
+                <div class="row">
+                    <!--div-- class="col-lg-12">
+                        <div class="footer">
+                            <p>2018 © Admin Board. - <a href="#">example.com</a></p>
+                        </div>
+                    </!--div-->
+                </div>
+                </section>
             </div>
-
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-
-
-    @yield('pageContent') <div class="row">
-        <!--div-- class="col-lg-12">
-                                <div class="footer">
-                                    <p>2018 © Admin Board. - <a href="#">example.com</a></p>
-                                </div>
-                            </!--div-->
-    </div>
-    </section>
-    </div>
-    </div>
     </div>
     <div id="search">
         <button type="button" class="close">×</button>

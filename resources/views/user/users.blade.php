@@ -49,8 +49,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="phone">Telefone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone"
-                                    required>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefone">
                             </div>
                         </div>
                         <div class="form-row">
@@ -134,7 +133,7 @@
         <tr>
             <td>{{$item->name}}</td>
             <td>{{$item->email}}</td>
-            <td>{{$item->phone}}</td>
+            <td>{{$item->cellPhone}}</td>
             <td>@if($item->admin)Sim @else Não @endif</td>
             <td>@if($item->active)Ativo @else Inativo @endif</td>
             <td>

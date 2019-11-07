@@ -1,4 +1,5 @@
-@extends('baseAdmin')
+@extends(Session::get('admin')[0] ? 'baseAdmin' : 'baseDefault')
+
 @section('pageTitle')
 <h1>Detalhes do Usuário</h1>
 @endsection
