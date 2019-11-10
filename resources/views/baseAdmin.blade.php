@@ -47,8 +47,8 @@ Meu Evento
 
                         </ul>
                     </li>
-                    <li {!! Route::is('getAllEvents') ? "class='active'" : '' !!}><a
-                            href="{{ route('getAllEvents')}}"><i class="ti-agenda"></i>
+                    <li {!! Route::is('getCompleted') ? "class='active'" : '' !!}><a
+                            href="{{ route('getCompleted')}}"><i class="ti-agenda"></i>
                             Eventos Concluídos </a>
                     </li>
                     <li><a><i class="ti-settings"></i>

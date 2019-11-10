@@ -157,11 +157,17 @@
                                                             </div>
                                                             <div class="phone-content">
                                                                 <span class="contact-title">Data:</span>
-                                                                <span class="labelDetail">{{$eventData->date}}</span>
+                                                                <span
+                                                                    class="labelDetail">{{\Carbon\Carbon::parse($eventData->date)->format('d/m/Y')}}</span>
                                                             </div>
                                                             <div class="address-content">
-                                                                <span class="contact-title">Endereço:</span>
-                                                                <span class="labelDetail">Singular</span>
+                                                                <span class="contact-title">Cidade/Estado:</span>
+                                                                <span
+                                                                    class="labelDetail">{{$eventData->city}}/{{$eventData->state}}</span>
+                                                            </div>
+                                                            <div class="address-content">
+                                                                <span class="contact-title">Local:</span>
+                                                                <span class="labelDetail">{{$eventData->locale}}</span>
                                                             </div>
                                                             <div class="email-content">
                                                                 <span class="contact-title">Horário:</span>
@@ -215,7 +221,9 @@
                                                     <div class="col-md-6">
                                                         <label for="cpf">Data</label>
                                                         <input type="date" class="form-control" id="date" name="date"
-                                                            placeholder="Data" value="{{$eventData->date}}" required>
+                                                            placeholder="Data"
+                                                            value="{{\Carbon\Carbon::parse($eventData->date)->format('Y-m-d')}}"
+                                                            required>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="cpf">Horário</label>
@@ -223,6 +231,29 @@
                                                             placeholder="Horário" value="{{$eventData->hour}}" required>
                                                     </div>
 
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <label for="state">Estado</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{$eventData->state}}" id="state" name="state"
+                                                            placeholder="Estado" required>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="city">Cidade</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{$eventData->city}}" id="city" name="city"
+                                                            placeholder="Cidade" required>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-12">
+                                                        <label for="locale">Local do evento</label>
+                                                        <input type="text" class="form-control" id="locale"
+                                                            name="locale" value="{{$eventData->locale}}"
+                                                            placeholder="Descreva o(s) local(is) do evento" required>
+                                                    </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col-md-6">
@@ -258,7 +289,8 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <label class="switch">
-                                                        <input name="completed" value=1 type="checkbox">
+                                                        <input name="completed" value=1 type="checkbox"
+                                                            @if($eventData->completed) checked @endif>
                                                         <span class="slider round"></span>
                                                     </label>
                                                     <label for="active">Concluído</label>

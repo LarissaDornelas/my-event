@@ -7,6 +7,8 @@ use App\Event;
 use App\EventCategory;
 use App\EventHasUser;
 use App\User;
+use Carbon\Carbon;
+use File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -59,7 +61,6 @@ class EventController extends Controller
                     ->select('event.*', 'eventCategory.name as eventCategoryName')
                     ->where('event.completed', 1)
                     ->orderBy('date')->get();
-                $eventCategories = EventCategory::where('active', 1)->get();
             } else {
                 $id = Auth::user()->id;
                 $events = DB::table('event_has_user')
@@ -72,13 +73,13 @@ class EventController extends Controller
                 $eventCategories = [];
             }
             if (sizeOf($events) > 0) {
-                return view('event/events', ['eventData' => $events, 'eventCategories' => $eventCategories]);
+                return view('event/completedEvents', ['eventData' => $events]);
             } else {
-                return view('event/events', ['eventData' => [],  'eventCategories' => $eventCategories]);
+                return view('event/completedEvents', ['eventData' => [],  'eventCategories' => $eventCategories]);
             }
         } catch (\Exception $e) {
 
-            return view('event/events', ['eventData' => [], 'eventCategories' => []]);
+            return view('event/completedEvents', ['eventData' => [], 'eventCategories' => []]);
         }
     }
 
@@ -86,15 +87,20 @@ class EventController extends Controller
     {
         try {
             $event = Event::where('id', $id)->first();
+
+            $dateNow = Carbon::now();
+            $dateEvent = Carbon::parse($event->date);
+            $wait = (string) $dateNow->diffInDays($dateEvent);
+            $wait = str_split($wait);
             if (Session::get('admin')[0]) {
 
 
-                return view('event/eventDetail', ['eventData' => $event]);
+                return view('event/eventDetail', ['eventData' => $event, 'days' => $wait]);
             } else {
                 $exists = EventHasUser::where([['event_id', $id], ['user_id', Auth::user()->id]])->get();
 
                 if (sizeOf($exists) > 0) {
-                    return view('event/eventDetail', ['eventData' => $event]);
+                    return view('event/eventDetail', ['eventData' => $event, 'days' => $wait]);
                 } else {
                     return redirect('/event')->with('error', 'Permissão necessária para acessar este evento.');
                 }
@@ -213,25 +219,39 @@ class EventController extends Controller
 
     public function update($id, Request $request)
     {
-        /*if ($request->image) {
+
+
+        $event = $request->except(['image', '_token']);
+
+        $event['completed'] = 0;
+        if ($request->completed) {
+            $event['completed'] = 1;
+        }
+
+        if ($request->image) {
+            try {
+                $imageNow = Event::select('image_url')->where('id', $id)->get();
+
+                unlink(public_path() . '/images/' . $imageNow[0]->image_url);
+            } catch (\Exception $e) {
+
+                return redirect('event/' .  $id . '/settings');
+            }
+
             $request->validate([
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             $imageName = time() . '.' . $request->image->getClientOriginalExtension();
 
             $request->image->move(public_path('images'), $imageName);
+            $event['image_url'] = $imageName;
         }
-        $newEvent = $request->except('image');
-        $newEvent['image_url'] = $imageName;
-        $newEvent['completed'] = 0; */
-
-        $event = $request->except("_token");
 
         try {
             Event::where('id', $id)->update($event);
             return redirect('event/' .  $id . '/settings');
         } catch (\Exception $e) {
-            dd($e);
+
             return redirect('event/' .  $id . '/settings');
         }
     }

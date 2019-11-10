@@ -53,6 +53,7 @@ Route::prefix('event/category')->middleware(['auth', 'admin'])->group(function (
 
 Route::prefix('event')->middleware('auth')->group(function () {
     Route::get('/', 'EventController@getAll')->name('getAllEvents');
+    Route::get('/completed', 'EventController@getCompleted')->name('getCompleted');
     Route::middleware('admin')->post('/', 'EventController@create')->name('createEvent');
     Route::post('/{id}', 'EventController@update')->name('updateEvent');
     Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');

@@ -23,12 +23,15 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'cpf', 'phone', 'email',  'active', 'admin', 'cellPhone', 'password'];
+    protected $fillable = [
+        'name', 'cpf', 'phone', 'email',  'active', 'admin', 'cellPhone', 'password', 'city', 'neighborhood',
+        'street', 'number', 'complement', 'cep', 'state', 'instagram, image_url'
+    ];
     protected $hidden = ['remember_token'];
     //protected $primaryKey = 'id';
 
 
-    //protected $fillable = ['id', 'name', 'cpf', 'phone', 'email',  'active', 'admin', 'cellPhone', 'password'];
+
 
     /**
      * The attributes excluded from the model's JSON form.

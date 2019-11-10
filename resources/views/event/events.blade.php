@@ -6,6 +6,7 @@
 <li class="breadcrumb-item"><a class="general-links" href="{{ route('dashboard')}}">Dashboard</a></li>
 <li class="breadcrumb-item active">Eventos</li>
 @endsection
+
 @section('pageContent')
 
 <div class="container-fluid">
@@ -62,6 +63,25 @@
                                 required>
                         </div>
 
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="state">Estado</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Estado"
+                                required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="city">Cidade</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Cidade" required>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="locale">Local do evento</label>
+                            <input type="text" class="form-control" id="locale" name="locale"
+                                placeholder="Descreva o(s) local(is) do evento" required>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
@@ -132,12 +152,13 @@
         <div class="card-desc">
             <i class="ti-bookmark-alt"> {{$item->eventCategoryName}}</i>
             <br>
-            <i class="ti-calendar"> {{$item->date}}</i>
+            <i class="ti-calendar"> {{\Carbon\Carbon::parse($item->date)->format('d/m/Y')}}</i>
             <br>
             <i class="ti-alarm-clock"> {{$item->hour}}</i>
             <br>
-
+            <i class="ti-location-arrow"> {{$item->city}} - {{$item->state}}</i>
             <br>
+
         </div>
         <div class="card-actions">
             <button type='button' class='card-action-readMore btn-card'

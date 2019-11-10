@@ -25,48 +25,22 @@
                         <div class="bloc-time hours" data-init-value="245">
                             <span class="count-title">FALTAM</span>
 
-
+                            @foreach ($days as $item)
                             <div class="figure hours hours-1">
-                                <span class="top">2</span>
+                                <span class="top">{{$item}}</span>
                                 <span class="top-back">
-                                    <span>2</span>
+                                    <span>{{$item}}</span>
                                 </span>
-                                <span class="bottom">2</span>
+                                <span class="bottom">{{$item}}</span>
                                 <span class="bottom-back">
-                                    <span>2</span>
+                                    <span>{{$item}}</span>
                                 </span>
                             </div>
 
-                            <div class="figure hours hours-2">
-                                <span class="top">4</span>
-                                <span class="top-back">
-                                    <span>4</span>
-                                </span>
-                                <span class="bottom">4</span>
-                                <span class="bottom-back">
-                                    <span>4</span>
-                                </span>
-                            </div>
-                            <div class="figure hours hours-2">
-                                <span class="top">4</span>
-                                <span class="top-back">
-                                    <span>4</span>
-                                </span>
-                                <span class="bottom">4</span>
-                                <span class="bottom-back">
-                                    <span>4</span>
-                                </span>
-                            </div>
-                            <div class="figure hours hours-2">
-                                <span class="top">4</span>
-                                <span class="top-back">
-                                    <span>4</span>
-                                </span>
-                                <span class="bottom">4</span>
-                                <span class="bottom-back">
-                                    <span>4</span>
-                                </span>
-                            </div>
+                            @endforeach
+
+                            <span class="count-span">Dias para o seu evento</span>
+
 
                         </div>
 

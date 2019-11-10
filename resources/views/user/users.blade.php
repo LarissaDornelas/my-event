@@ -36,10 +36,18 @@
 
 
                         <div class="form-row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="name">Nome Completo</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     placeholder="Nome Completo" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="name">Sexo</label>
+                                <select name="gender" class="form-control">
+                                    <option value="Outros">Outros</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Masculino">Masculino</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-row">
@@ -63,6 +71,55 @@
                                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"
                                     required>
                             </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="cpf">Cep</label>
+                                <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cpf">Cidade</label>
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Cidade"
+                                    required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone">Estado</label>
+                                <input type="text" class="form-control" id="state" name="state" placeholder="Estado">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <label for="cpf">Bairro</label>
+                                <input type="text" class="form-control" id="neighborhood" name="neighborhood"
+                                    placeholder="Bairro" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="cpf">Rua</label>
+                                <input type="text" class="form-control" id="street" name="street" placeholder="Rua"
+                                    required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone">Complemento</label>
+                                <input type="text" class="form-control" id="complement" name="complement"
+                                    placeholder="Complemento">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-6">
+                                <label for="email">Instagram</label>
+                                <input type="text" class="form-control" id="instagram" name="instagram"
+                                    placeholder="Instagram" required>
+                            </div>
+                            <div class="col-6">
+                                <label for="email">Facebook</label>
+                                <input type="text" class="form-control" id="facebook" name="facebook"
+                                    placeholder="Facebook" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="eventImage">Adicionar uma imagem de perfil</label>
+                            <input type="file" name="image" class="form-control-file" id="image">
                         </div>
                         <div class="switches">
                             <div class="form-row ">

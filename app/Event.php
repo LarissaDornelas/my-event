@@ -23,7 +23,8 @@ class Event extends Model
      */
     protected $fillable = [
         'name', 'date', 'description', 'maxPrice', 'currentPrice', 'created_at',
-        'updated_at', 'completed', 'canceled', 'eventCategory_id', 'hour', 'image_url',
+        'updated_at', 'completed', 'canceled', 'eventCategory_id', 'hour', 'image_url', 'city', 'state',
+        'locale'
     ];
 
     /**

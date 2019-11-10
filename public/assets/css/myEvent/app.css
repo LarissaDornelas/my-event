@@ -286,7 +286,7 @@ body {
 .card-desc {
     padding: 0 1em 1em 1em;
     border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-    height: 75px;
+    height: 120px;
     overflow: hidden;
     text-align: justify;
 }
@@ -519,6 +519,7 @@ body {
     margin: 0 auto;
 }
 .countdown .bloc-time {
+    align-items: center;
     float: left;
     margin-right: 45px;
     text-align: center;
@@ -661,12 +662,17 @@ body {
 }
 
 .event-countdown {
+    display: flex;
     padding: 0px 1px 364px;
     animation: scl 0.5s ease-in-out;
     transform-origin: left center;
     transition: 0.4s;
 }
 
+.count-span {
+    margin-top: 107px;
+    display: block;
+}
 .nav-event {
     height: 55px;
     margin-bottom: -27px !important;
