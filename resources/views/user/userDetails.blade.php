@@ -40,19 +40,20 @@
                                 <div class="user-work">
                                     <h4>Redes Sociais</h4>
                                     <div class="work-content">
-                                        <i class="ti-instagram"></i> fabi_dolabela
+                                        <i class="ti-instagram"></i> {{$userData->instagram}}
 
 
                                     </div>
                                     <div class="work-content">
-                                        <i class="ti-facebook"></i> Fabiany Dolabela
+                                        <i class="ti-facebook"></i> {{$userData->facebook}}
                                     </div>
                                 </div>
 
                             </div>
                             <div class="col-lg-7">
                                 <div class="user-profile-name">{{$userData->name}}</div>
-                                <div class="user-Location"><i class="ti-location-pin"></i> João Monlevade - MG</div>
+                                <div class="user-Location"><i class="ti-location-pin"></i> {{$userData->city}},
+                                    {{$userData->state}}</div>
 
 
                                 <div class="custom-tab user-profile-tab">
@@ -67,7 +68,8 @@
                                                 </div>
                                                 <div class="address-content">
                                                     <span class="contact-title">Endereço:</span>
-                                                    <span class="labelDetail">123, Rajar Goli, South Mugda</span>
+                                                    <span class="labelDetail">{{$userData->street}},
+                                                        {{$userData->number}}, {{$userData->neighborhood}}</span>
                                                 </div>
                                                 <div class="email-content">
                                                     <span class="contact-title">Email:</span>
@@ -75,22 +77,24 @@
                                                 </div>
                                                 <div class="website-content">
                                                     <span class="contact-title">Facebook:</span>
-                                                    <span class="labelDetail">test</span></span>
+                                                    <span class="labelDetail">{{$userData->facebook}}</span></span>
                                                 </div>
                                                 <div class="skype-content">
                                                     <span class="contact-title">Instagram:</span>
-                                                    <span class="labelDetail">test</span>
+                                                    <span class="labelDetail">{{$userData->instagram}}</span>
                                                 </div>
                                             </div>
                                             <div class="basic-information">
                                                 <h4>Informações Básicas</h4>
                                                 <div class="birthday-content">
                                                     <span class="contact-title">Aniversário:</span>
-                                                    <span class="labelDetail">03/10/1998 </span>
+                                                    <span
+                                                        class="labelDetail">{{\Carbon\Carbon::parse($userData->birthday)->format('d/m/Y')}}
+                                                    </span>
                                                 </div>
                                                 <div class="gender-content">
                                                     <span class="contact-title">Gênero:</span>
-                                                    <span class="labelDetail">Masculino</span>
+                                                    <span class="labelDetail">{{$userData->gender}}</span>
                                                 </div>
                                             </div>
                                             <div class="basic-information">
@@ -129,6 +133,7 @@
         <form action="{{ route('updateUser', ['id'=> $userData->id]) }}" method="POST">
             @method('PUT')
             @csrf
+
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar Usuário</h5>
@@ -141,36 +146,108 @@
 
 
                     <div class="form-row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="name">Nome Completo</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nome Completo"
-                                required value="{{$userData->name}}">
+                            <input type="text" class="form-control" id="name" name="name" value='{{$userData->name}}'
+                                placeholder="Nome Completo" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="name">Sexo</label>
+                            <select name="gender" class="form-control">
+                                <option value="Outros" @if($userData->gender==="outros") selected @endif> Outros
+                                </option>
+                                <option value="Feminino" @if($userData->gender==="feminino") selected @endif>Feminino
+                                </option>
+                                <option value="Masculino" @if($userData->gender==="masculino") selected @endif>Masculino
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="cpf">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF"
-                                value="{{$userData->cpf}}" required>
+                            <input type="text" value='{{$userData->cpf}}' class="form-control" id="cpf" name="cpf"
+                                placeholder="CPF" required>
                         </div>
                         <div class="col-md-6">
                             <label for="phone">Telefone</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="{{$userData->phone}}"
-                                placeholder="Telefone" required>
+                            <input type="text" value='{{$userData->phone}}' class="form-control" id="phone" name="phone"
+                                placeholder="Telefone">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-6">
                             <label for="email">Celular</label>
                             <input type="text" class="form-control" id="cellPhone" name="cellPhone"
-                                value="{{$userData->cellPhone}}" placeholder="Celular" required>
+                                placeholder="Celular" value='{{$userData->cellPhone}}' required>
                         </div>
                         <div class="col-6">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="{{$userData->email}}"
-                                placeholder="Email" required>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                value={{$userData->email}} required>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="cpf">Cep</label>
+                            <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP"
+                                value='{{$userData->cep}}' required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cpf">Cidade</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Cidade"
+                                value='{{$userData->city}}' required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="phone">Estado</label>
+                            <input type="text" class="form-control" id="state" name="state" placeholder="Estado"
+                                value='{{$userData->state}}'>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="cpf">Bairro</label>
+                            <input type="text" class="form-control" id="neighborhood" name="neighborhood"
+                                value='{{$userData->neighborhood}}' placeholder="Bairro" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cpf">Rua</label>
+                            <input type="text" class="form-control" id="street" name="street" placeholder="Rua"
+                                value='{{$userData->street}}' required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="phone">Complemento</label>
+                            <input type="text" class="form-control" id="complement" name="complement"
+                                value='{{$userData->complement}}' placeholder="Complemento">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="phone">Número</label>
+                            <input type="text" class="form-control" id="number" name="number"
+                                value='{{$userData->number}}' placeholder="Número da casa/apartamento">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="birthday">Data de Nascimento</label>
+                            <input type="date" class="form-control" id="birthday" name="birthday"
+                                value='{{\Carbon\Carbon::parse($userData->date)->format('Y-m-d')}}'
+                                placeholder="Data de nascimento">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-6">
+                            <label for="email">Instagram</label>
+                            <input type="text" class="form-control" id="instagram" name="instagram"
+                                placeholder="Instagram" value='{{$userData->instagram}}' required>
+                        </div>
+                        <div class="col-6">
+                            <label for="email">Facebook</label>
+                            <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Facebook"
+                                value='{{$userData->facebook}} ' required>
+                        </div>
+                    </div>
+                    <br>
+
                     <div class="switches">
                         <div class="form-row ">
 

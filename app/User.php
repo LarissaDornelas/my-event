@@ -25,7 +25,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'cpf', 'phone', 'email',  'active', 'admin', 'cellPhone', 'password', 'city', 'neighborhood',
-        'street', 'number', 'complement', 'cep', 'state', 'instagram, image_url'
+        'street', 'number', 'complement', 'cep', 'state', 'instagram', 'gender', 'facebook', 'birthday'
     ];
     protected $hidden = ['remember_token'];
     //protected $primaryKey = 'id';

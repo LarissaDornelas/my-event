@@ -48,7 +48,7 @@
         <div class="card-desc">
             <i class="ti-bookmark-alt"> {{$item->eventCategoryName}}</i>
             <br>
-            <i class="ti-calendar"> {{$item->date}}</i>
+            <i class="ti-calendar"> {{\Carbon\Carbon::parse($item->date)->format('d/m/Y')}}</i>
             <br>
             <i class="ti-alarm-clock"> {{$item->hour}}</i>
             <br>

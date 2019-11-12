@@ -105,6 +105,18 @@
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="phone">Número</label>
+                                <input type="text" class="form-control" id="number" name="number"
+                                    placeholder="Número da casa/apartamento">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="birthday" name="birthday"
+                                    placeholder="Data de nascimento">
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col-6">
                                 <label for="email">Instagram</label>
                                 <input type="text" class="form-control" id="instagram" name="instagram"
@@ -117,10 +129,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="form-group">
-                            <label for="eventImage">Adicionar uma imagem de perfil</label>
-                            <input type="file" name="image" class="form-control-file" id="image">
-                        </div>
+
                         <div class="switches">
                             <div class="form-row ">
 

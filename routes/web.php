@@ -62,7 +62,5 @@ Route::prefix('event')->middleware('auth')->group(function () {
     Route::post('/{id}/settings', 'EventController@update')->name('updateEvent');
     Route::post('/{id}/integration', 'EventController@addAccountToEvent')->name('accountIntegration');
     Route::delete('/{id}/integration', 'EventController@deleteAccountFromEvent')->name('accountRemove');
-    /*
-    Route::put('/{id}', 'EventController@update')->name('updateEvent');
-    Route::delete('/{id}', 'EventController@delete')->name('deleteEvent');*/
+    Route::get('/{id}/budget', 'BudgetController@getBudget')->name('budgetGeneral');
 });

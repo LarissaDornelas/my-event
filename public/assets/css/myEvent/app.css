@@ -732,3 +732,30 @@ body {
 .deleteIcon:hover {
     opacity: 0.6;
 }
+
+.budget-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.budget-content {
+    display: flex;
+}
+
+.budget-values {
+    font-weight: 800;
+    font-family: cursive;
+    font-size: 23px;
+}
+.budget-group {
+    padding: 48px 102px;
+}
+.strong {
+    font-weight: 600;
+}
+
+.title-budget {
+    font-family: cursive;
+    font-size: 31px;
+}

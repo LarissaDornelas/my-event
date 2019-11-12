@@ -206,8 +206,9 @@ Meu Evento
                             <a class="nav-link"> Dicas e Observações </a>
                         </li>
 
-                        <li class="nav-item nav-event">
-                            <a class="nav-link"> Orçamento </a>
+                        <li class="nav-item nav-event @if(Route::is('budgetGeneral')) active @endif">
+                            <a href=" {{route('budgetGeneral', ['id' => Request::segment(2)])}}" class="nav-link">
+                                Orçamento</a>
                         </li>
                         <li class="nav-item nav-event @if(Route::is('settings')) active @endif"">
                             <a href=" {{route('settings', ['id' => Request::segment(2)])}}" class="nav-link">

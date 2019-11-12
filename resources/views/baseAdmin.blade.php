@@ -213,18 +213,10 @@ Meu Evento
                             <li class="header-icon dib"><span class="user-avatar">{{Auth::User()->name}} &nbsp; <i
                                         class="ti-angle-down f-s-10"></i></span>
                                 <div class="drop-down dropdown-profile">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">Upgrade Now</span>
-                                        <p class="trial-day">30 Days Trail</p>
-                                    </div>
+
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><a href="#"><i class="ti-user"></i> <span>Profile</span></a></li>
 
-                                            <li><a href="#"><i class="ti-email"></i> <span>Inbox</span></a></li>
-                                            <li><a href="#"><i class="ti-settings"></i> <span>Setting</span></a></li>
-
-                                            <li><a href="#"><i class="ti-lock"></i> <span>Lock Screen</span></a></li>
                                             <li><a href="{{Route('logout')}}"><i class="ti-power-off"></i>
                                                     <span>Sair</span></a></li>
                                         </ul>
