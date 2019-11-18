@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('login', 'Auth\LoginController@showLogin')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('postLogin');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -57,10 +46,22 @@ Route::prefix('event')->middleware('auth')->group(function () {
     Route::middleware('admin')->post('/', 'EventController@create')->name('createEvent');
     Route::post('/{id}', 'EventController@update')->name('updateEvent');
     Route::get('/{id}', 'EventController@getOne')->name('getOneEvent');
-    Route::get('/{id}/tasks', 'TaskController@getEventTasks')->name('getEventTasks');
+
     Route::get('/{id}/settings', 'EventController@viewSettings')->name('settings');
     Route::post('/{id}/settings', 'EventController@update')->name('updateEvent');
+
     Route::post('/{id}/integration', 'EventController@addAccountToEvent')->name('accountIntegration');
     Route::delete('/{id}/integration', 'EventController@deleteAccountFromEvent')->name('accountRemove');
+
     Route::get('/{id}/budget', 'BudgetController@getBudget')->name('budgetGeneral');
+
+    Route::put('/{id}/provider/{provider_id}', 'BudgetController@updateEventProvider')->name('updateEventProvider');
+    Route::get('/{id}/provider', 'BudgetController@getEventProviders')->name('eventProviders');
+    Route::post('/{id}/provider', 'BudgetController@addEventProvider')->name('addEventProvider');
+    Route::delete('/{id}/provider', 'BudgetController@deleteEventProvider')->name('deleteEventProvider');
+
+    Route::put('/{id}/task/{task_id}', 'BudgetController@updateEventProvider')->name('updateEventProvider');
+    Route::get('/{id}/task', 'TaskController@getEventTasks')->name('getEventTasks');
+    Route::post('/{id}/task', 'BudgetController@addEventProvider')->name('addEventProvider');
+    Route::delete('/{id}/task', 'BudgetController@deleteEventProvider')->name('deleteEventProvider');
 });

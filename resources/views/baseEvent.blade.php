@@ -199,11 +199,9 @@ Meu Evento
                             <a href=" {{route('getEventTasks', ['id' => Request::segment(2)])}}" class="nav-link">
                             Tarefas </a>
                         </li>
-                        <li class="nav-item nav-event">
-                            <a class="nav-link"> Fornecedores</a>
-                        </li>
-                        <li class="nav-item nav-event">
-                            <a class="nav-link"> Dicas e Observações </a>
+                        <li class="nav-item nav-event @if(Route::is('eventProviders')) active @endif">
+                            <a href=" {{route('eventProviders', ['id' => Request::segment(2)])}}" class="nav-link">
+                                Fornecedores</a>
                         </li>
 
                         <li class="nav-item nav-event @if(Route::is('budgetGeneral')) active @endif">

@@ -12,15 +12,8 @@
                     <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
                         aria-controls="v-pills-home" aria-selected="true">Orçamento Total</a>
                     <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                        aria-controls="v-pills-profile" aria-selected="false">Buffet</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                        aria-controls="v-pills-profile" aria-selected="false">Música para a cerimônia</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                        aria-controls="v-pills-profile" aria-selected="false">Música para a festa</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                        aria-controls="v-pills-profile" aria-selected="false">Salão de eventos</a>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-                        aria-controls="v-pills-profile" aria-selected="false">Vestido</a>
+                        aria-controls="v-pills-profile" aria-selected="false">Orçamento Detalhado</a>
+
 
                 </div>
             </div>

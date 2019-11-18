@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Budget extends Model  
+class Budget extends Model
 {
 
-    
+
 
     /**
      * The database table used by the model.
@@ -21,7 +21,7 @@ class Budget extends Model
      *
      * @var array
      */
-    protected $fillable = ['value', 'provider_id', 'provider_category_id', 'name', 'description', 'category_id'];
+    protected $fillable = ['value', 'provider_id', 'description', 'provider_category_id', 'event_id', 'paid'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -43,5 +43,4 @@ class Budget extends Model
      * @var array
      */
     protected $dates = [];
-
 }
