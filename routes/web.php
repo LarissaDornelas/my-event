@@ -17,6 +17,7 @@ Route::prefix('user')->middleware('auth')->group(function () {
     Route::middleware('admin')->get('/', 'UserController@getAll')->name('getAllUsers');
     Route::post('/', 'UserController@create')->name('createUser');
     Route::put('/{id}', 'UserController@update')->name('updateUser');
+    Route::get('/profile/{id}', 'UserController@getProfile')->name('getProfile');
     Route::get('/{id}', 'UserController@getOne')->name('getOneUser');
 });
 

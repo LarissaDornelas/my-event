@@ -51,7 +51,8 @@ Meu Evento
                             href="{{ route('getCompleted')}}"><i class="ti-agenda"></i>
                             Eventos Concluídos </a>
                     </li>
-                    <li><a><i class="ti-settings"></i>
+                    <li {!! Route::is('getProfile') ? "class='active'" : '' !!}><a
+                            href="{{ route('getProfile', ['id' => Auth::user()->id])}}"><i class="ti-settings"></i>
                             Configurações </a>
                     </li>
 

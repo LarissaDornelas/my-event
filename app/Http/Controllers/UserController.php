@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
 class UserController extends Controller
@@ -41,7 +42,10 @@ class UserController extends Controller
             } else {
                 return redirect('/user')->with('error', 'Houve um erro ao abrir usuário');
             }
-        } catch (\Exception $e) { }
+        } catch (\Exception $e) {
+
+            return redirect('/user')->with('error', 'Houve um erro ao abrir usuário');
+        }
     }
 
     public function create(Request $request)
@@ -95,6 +99,26 @@ class UserController extends Controller
             return redirect('/user/' . $id)->with('status', 'Dados atualizados com sucesso');
         } catch (\Exception $e) {
             return redirect('/user/' . $id)->with('error', 'Houve um erro ao atualizar os dados. Tente novamente mais tarde.');
+        }
+    }
+
+
+    function getProfile($id)
+    {
+        if ($id == Auth::user()->id) {
+            try {
+                $user = User::where('id', $id)->first();
+                if ($user != null) {
+                    return view('user/profileSettings', ['userData' => $user]);
+                } else {
+                    return redirect('/')->with('error', 'Houve um erro ao abrir usuário');
+                }
+            } catch (\Exception $e) {
+
+                return redirect('/')->with('error', 'Houve um erro ao abrir usuário');
+            }
+        } else {
+            return redirect('/')->with('error', 'Houve um erro ao abrir usuário');
         }
     }
 }
